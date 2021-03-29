@@ -15,12 +15,18 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyler"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="130dp"/>
+
         <Button
             android:id="@+id/goalAdd"
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="30dp"
             android:backgroundTint="#773800"
             android:fontFamily="@font/binggreabold"
             android:text="목표 추가"
@@ -33,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fontFamily="@font/binggreabold"
-        android:format24Hour="HH:mm:ss"
+        android:format12Hour="HH:mm:ss"
         android:textAlignment="center"
         android:textColor="#1C0400"
         android:textSize="80sp"
