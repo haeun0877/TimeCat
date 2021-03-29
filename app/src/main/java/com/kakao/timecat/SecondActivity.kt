@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
 
-    val DB_NAME = "cattime.sql"
+    val DB_NAME = "cat.sql"
     val DB_VERSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +29,6 @@ class SecondActivity : AppCompatActivity() {
 
         recyler.adapter=adapter
         recyler.layoutManager = LinearLayoutManager(this)
-
-        Toast.makeText(this, "${goals.size}", Toast.LENGTH_SHORT).show()
 
         goalAdd.setOnClickListener{
             val intent = Intent(this, GoalSettingActivity::class.java)

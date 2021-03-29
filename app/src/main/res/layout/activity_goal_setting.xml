@@ -32,6 +32,7 @@
             android:backgroundTint="#E6C087"
             android:fontFamily="@font/binggreabold"
             android:privateImeOptions="defaultInputmode=korean"
+            android:text=""
             android:textColor="#FFFDF9"
             android:textSize="30sp" />
     </LinearLayout>
