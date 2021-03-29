@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back2"
+    tools:context=".GoalSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="120dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목표제목"
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"/>
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="#E6C087"
+            android:fontFamily="@font/binggreabold"
+            android:privateImeOptions="defaultInputmode=korean"
+            android:textColor="#FFFDF9"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목표달성일"
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"/>
+
+        <Switch
+            android:id="@+id/switchDate"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Select"
+            android:fontFamily="@font/binggreabold"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    <DatePicker
+        android:id="@+id/dataPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:startYear="2021"
+        android:endYear="2100"
+    />
+
+    <Button
+        android:id="@+id/goalAdd"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#773800"
+        android:fontFamily="@font/binggreabold"
+        android:text="목표 추가"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+</LinearLayout>

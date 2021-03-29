@@ -1,5 +1,6 @@
 package com.kakao.timecat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -12,5 +13,9 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        goalAdd.setOnClickListener{
+            val intent = Intent(this, GoalSettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
