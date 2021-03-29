@@ -20,6 +20,8 @@ class GoalSettingActivity : AppCompatActivity() {
         val DB_NAME = "cattime.sql"
         val DB_VERSION = 1
         var userId:String = ""
+        var userNickname:String = ""
+        var goal:String=""
 
         switchDate.setChecked(true)
         switchDate.setOnCheckedChangeListener{_, onSwitch ->
@@ -35,22 +37,25 @@ class GoalSettingActivity : AppCompatActivity() {
 
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
+            userNickname = user?.kakaoAccount?.profile?.nickname.toString()
+
         }
+
+        //카카오 아이디 불러오기 잘 작동됨
+        //Toast.makeText(this, "${userId}", Toast.LENGTH_SHORT).show()
 
         goalAdd.setOnClickListener{
-            Toast.makeText(this, "${userId}", Toast.LENGTH_SHORT).show()
-            /*
+            goal= goalName.text.toString()
+
+            val catUser = CatUser(userId,userNickname,goal,"","")
+
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
-
-             */
         }
 
-        /*
         val helper = DBHelper(this, DB_NAME, DB_VERSION)
 
-        val catUser = CatUser()
-         */
+
 
 
 
