@@ -19,7 +19,8 @@
             android:id="@+id/recyler"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="130dp"/>
+            android:layout_marginTop="130dp"
+            tools:listitem="@layout/goal_item" />
 
         <Button
             android:id="@+id/goalAdd"

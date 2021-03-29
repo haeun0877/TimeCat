@@ -1,15 +1,17 @@
 package db
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
 
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String)
 
 class DBHelper(context: Context, name:String, version:Int)
     : SQLiteOpenHelper(context, name, null, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "create table user (id text primary key, name text, goal text, goaldate text, startdate text)"
+        val create = "create table user (id text, name text, goal text, goaldate text, startdate text)"
         db?.execSQL(create)
     }
 
@@ -19,6 +21,71 @@ class DBHelper(context: Context, name:String, version:Int)
 
     //데이터 입력 함수
     fun insertData(catUser:CatUser){
+        //db 가져오기
+        val wd = writableDatabase
+        //CatUser을 입력타입으로 변환시켜줌
+        val values = ContentValues()
+        values.put("id", catUser.id)
+        values.put("name", catUser.name)
+        values.put("goal", catUser.goal)
+        values.put("goaldate", catUser.goaldate)
+        values.put("startdate", catUser.startdate)
 
+        //db 넣기
+        wd.insert("user",null,values)
+
+        //db 닫기
+        wd.close()
+    }
+
+    //데이터 조회 함수
+    fun selectData() : MutableList<CatUser>{
+        val list = mutableListOf<CatUser>()
+
+        val select = "select * from user"
+        val rd = readableDatabase
+        val cursor = rd.rawQuery(select,null)
+
+        while(cursor.moveToNext()){
+            val id = cursor.getString(cursor.getColumnIndex("id"))
+            val name = cursor.getString(cursor.getColumnIndex("name"))
+            val goal = cursor.getString(cursor.getColumnIndex("goal"))
+            val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
+            val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
+
+            val user = CatUser(id, name, goal, goaldate, startdate)
+            list.add(user)
+        }
+        cursor.close()
+        rd.close()
+
+        return list
+    }
+
+    //데이터 수정 함수
+    fun updateData(catUser:CatUser){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("id", catUser.id)
+        values.put("name", catUser.name)
+        values.put("goal", catUser.goal)
+        values.put("goaldate", catUser.goaldate)
+        values.put("startdate", catUser.startdate)
+
+        //whereClause 부분에서 어떤 컬럼값을 삭제할지 조건값을 넣음
+        wd.update("user", values, "id = ${catUser.id}", null)
+        wd.close()
+    }
+
+    //데이터 삭제 함수
+    fun deleteData(catUser:CatUser){
+        val wd = writableDatabase
+        /*
+        val delete = "delete from user where id = ${catUser.id}"
+        wd.execSQL(delete)
+         */
+
+        wd.delete("user", "id=${catUser.id}",null)
+        wd.close()
     }
 }
