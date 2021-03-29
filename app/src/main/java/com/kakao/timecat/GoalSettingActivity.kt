@@ -10,6 +10,7 @@ class GoalSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
 
+        //스위치데이터
         switchDate.setChecked(true)
         switchDate.setOnCheckedChangeListener{_, onSwitch ->
             if(onSwitch){
