@@ -30,16 +30,15 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:backgroundTint="#E6C087"
-            android:fontFamily="@font/binggreabold"
+            android:fontFamily="@font/binggrea"
             android:privateImeOptions="defaultInputmode=korean"
-            android:text=""
-            android:textColor="#FFFDF9"
+            android:textColor="#1C0400"
             android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="80dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,24 +54,25 @@
             android:id="@+id/switchDate"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Select"
+            android:text="always"
             android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
             android:textSize="24sp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"/>
 
+        <TextView
+            android:id="@+id/goalTimeText"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"/>
+
+
     </LinearLayout>
 
-    <DatePicker
-        android:id="@+id/dataPick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:startYear="2021"
-        android:endYear="2100"
-    />
 
     <Button
         android:id="@+id/goalAdd"

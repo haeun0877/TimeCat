@@ -21,6 +21,7 @@ import java.util.*
 //goalTime 에러 -> 아무런 값도 안들어가고있음 !! 수정 필요 !!
 
 class GoalSettingActivity : AppCompatActivity() {
+    var goalTime:String = "always"
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,18 +31,18 @@ class GoalSettingActivity : AppCompatActivity() {
         val DB_VERSION = 1
         var userId:String = ""
         var userNickname:String = ""
-        var goalTime:String = ""
-        var startTime:String = ""
 
-        switchDate.setChecked(true)
+        var startTime:String = ""
+        val dialogFragment = DatePickerFragment()
+
         switchDate.setOnCheckedChangeListener{_, onSwitch ->
             if(onSwitch) {
                 switchDate.text = "select"
-                dataPick.visibility = View.VISIBLE
+                dialogFragment.show(supportFragmentManager,"customDialog")
             }
             else{
+                goalTimeText.text=""
                 switchDate.text="always"
-                dataPick.visibility= View.INVISIBLE
             }
         }
 
@@ -59,26 +60,30 @@ class GoalSettingActivity : AppCompatActivity() {
 
         var year1:Int=0
         goalAdd.setOnClickListener{
-            if(switchDate.isChecked){
-                var date_listener = object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-                        goalTime = "${year.toString()}-${month.toString()}-${day.toString()}"
-                        year1 = year
-                    }
-                }
-            }else{
+            if(!switchDate.isChecked)
                 goalTime="always"
-            }
 
-
-            Toast.makeText(this, "${year1}year1", Toast.LENGTH_SHORT).show()
-
+            /*
             var helper = DBHelper(this, DB_NAME, DB_VERSION)
             var catUser = CatUser(userId,userNickname,goalName.text.toString(),goalTime,startTime)
             helper.insertData(catUser)
 
             var intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+             */
+
+            Toast.makeText(this, "${goalTime}", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun doCancel(cancel:Boolean){
+        if(cancel){
+            switchDate.isChecked=false
+        }
+    }
+
+    fun makeGoalTime(year:Int, month:Int, day:Int){
+        goalTime = "${year}/${month}/${day}"
+        goalTimeText.text="${goalTime}"
     }
 }
