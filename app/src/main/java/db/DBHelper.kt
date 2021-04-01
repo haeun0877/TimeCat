@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.content.contentValuesOf
 
-data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String)
+data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String)
 
 class DBHelper(context: Context, name:String, version:Int)
     : SQLiteOpenHelper(context, name, null, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "create table user (id text, name text, goal text, goaldate text, startdate text)"
+        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text)"
         db?.execSQL(create)
     }
 
@@ -30,6 +30,7 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goal", catUser.goal)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
+        values.put("time", catUser.time)
 
         //db 넣기
         wd.insert("user",null,values)
@@ -52,8 +53,9 @@ class DBHelper(context: Context, name:String, version:Int)
             val goal = cursor.getString(cursor.getColumnIndex("goal"))
             val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
+            val time = cursor.getString(cursor.getColumnIndex("time"))
 
-            val user = CatUser(id, name, goal, goaldate, startdate)
+            val user = CatUser(id, name, goal, goaldate, startdate, time)
             list.add(user)
         }
         cursor.close()
@@ -71,6 +73,7 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goal", catUser.goal)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
+        values.put("time", catUser.time)
 
         //whereClause 부분에서 어떤 컬럼값을 삭제할지 조건값을 넣음
         wd.update("user", values, "id = ${catUser.id}", null)
