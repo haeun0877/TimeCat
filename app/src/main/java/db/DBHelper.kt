@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.content.contentValuesOf
 
-data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String)
+data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String)
 
 class DBHelper(context: Context, name:String, version:Int)
     : SQLiteOpenHelper(context, name, null, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text)"
+        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, alarm text)"
         db?.execSQL(create)
     }
 
@@ -31,6 +31,7 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
+        values.put("alarm", catUser.alarm)
 
         //db 넣기
         wd.insert("user",null,values)
@@ -54,8 +55,9 @@ class DBHelper(context: Context, name:String, version:Int)
             val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
             val time = cursor.getString(cursor.getColumnIndex("time"))
+            val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
 
-            val user = CatUser(id, name, goal, goaldate, startdate, time)
+            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm)
             list.add(user)
         }
         cursor.close()
@@ -74,6 +76,7 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
+        values.put("alarm", catUser.alarm)
 
         //whereClause 부분에서 어떤 컬럼값을 삭제할지 조건값을 넣음
         wd.update("user", values, "id = ${catUser.id}", null)
@@ -91,4 +94,5 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.delete("user", "id=${catUser.id}",null)
         wd.close()
     }
+
 }

@@ -14,7 +14,7 @@ import java.util.*
 import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
-    val DB_NAME = "catDB.sql"
+    val DB_NAME = "catdb.sql"
     val DB_VERSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class SecondActivity : AppCompatActivity() {
         val goals = helper.selectData()
         adapter.listData.addAll(goals)
         adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int) {
-                go_three()
+            override fun onClick(v: View, position: Int, goalname:String) {
+                go_three(goalname)
             }
         })
 
@@ -43,8 +43,9 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
-    private fun go_three() {
+    private fun go_three(goal:String) {
         var intent = Intent(this, DetailedGoalActivity::class.java)
+        intent.putExtra("goalName","${goal}")
         startActivity(intent)
     }
 

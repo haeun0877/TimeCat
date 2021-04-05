@@ -1,6 +1,7 @@
 package com.kakao.timecat
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build
@@ -23,23 +24,24 @@ import java.util.*
 class GoalSettingActivity : AppCompatActivity() {
     var goalTime:String = "always"
     var time:String="off"
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
 
-        val DB_NAME = "catDB.sql"
+        val DB_NAME = "catdb.sql"
         val DB_VERSION = 1
         var userId:String = ""
         var userNickname:String = ""
         var startTime:String = ""
-        val dialogFragment = DatePickerFragment()
-        val dialogFragmentTime = TimePickerFragment()
+        var alarmOn:String="off"
 
+        //목표날짜 always, select중 고르는 스위치버튼
         switchDate.setOnCheckedChangeListener{_, onSwitch ->
             if(onSwitch) {
                 switchDate.text = "select"
-                dialogFragment.show(supportFragmentManager,"customDialog")
+                showDatePicker()
             }
             else{
                 goalTimeText.text=""
@@ -47,15 +49,25 @@ class GoalSettingActivity : AppCompatActivity() {
             }
         }
 
+        //목표시간 off, on중 고르는 스위치버튼
         switchOnOff.setOnCheckedChangeListener { _, isOn ->
             if(isOn){
                 switchOnOff.text="on"
                 alamOnOff.visibility=View.VISIBLE
-                dialogFragmentTime.show(supportFragmentManager,"timeCustomDialog")
+                showTimePicker()
             }else{
                 switchOnOff.text="off"
                 alamOnOff.visibility=View.INVISIBLE
                 resulttime.visibility=View.INVISIBLE
+            }
+        }
+
+        //알람 on, onff중 고르는 스위치 버튼
+        alamOnOff.setOnCheckedChangeListener {_, isOn->
+            if(isOn){
+                alarmOn="On"
+            }else{
+                alarmOn="Off"
             }
         }
 
@@ -77,15 +89,13 @@ class GoalSettingActivity : AppCompatActivity() {
             if(!switchDate.isChecked)
                 goalTime="always"
 
-            /*
             var helper = DBHelper(this, DB_NAME, DB_VERSION)
-            var catUser = CatUser(userId,userNickname,goalName.text.toString(),goalTime,startTime,time)
+            var catUser = CatUser(userId,userNickname,goalName.text.toString(),goalTime,startTime,time,alarmOn)
             helper.insertData(catUser)
 
             var intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
 
-             */
             Toast.makeText(this, "${goalTime}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -103,14 +113,46 @@ class GoalSettingActivity : AppCompatActivity() {
         }
     }
 
+    //목표날짜 설정하는 함수
     fun makeGoalTime(year:Int, month:Int, day:Int){
-        goalTime = "${year}/${month}/${day}"
+        goalTime = "${year}-${month}-${day}"
         goalTimeText.text="${goalTime}"
     }
 
-    fun makeTimeText(hour:Int, minute:Int, ampm:String){
-        time = "${hour}:${minute} ${ampm}"
+    //목표시간을 설정하는 함수
+    fun makeTimeText(hour:Int, minute:Int){
+        time = "${hour}:${minute}"
         resulttime.visibility=View.VISIBLE
-        resulttime.text="${time}"
+        resulttime.text="${time} 시작"
     }
+
+    //데이트피커다이어로그 생성함수
+    private fun showDatePicker() {
+        val cal = Calendar.getInstance()
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, dat ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DATE, dat)
+
+            makeGoalTime(year, month+1, dat)
+        }
+
+        DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)). show()
+    }
+
+    //타임피커다이어로그 생성함수
+    private fun showTimePicker() {
+        val cal = Calendar.getInstance()
+
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+
+            makeTimeText(hour, minute)
+        }
+        TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+
+    }
+
 }

@@ -9,6 +9,7 @@
     tools:context=".DetailedGoalActivity">
 
     <TextView
+        android:id="@+id/imsi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="디테일골3페이지"

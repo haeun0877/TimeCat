@@ -31,11 +31,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         holder.setGoal(catUser)
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+            itemClickListener.onClick(it, position, catUser.goal)
         }
     }
     interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
+        fun onClick(v: View, position: Int, goalName: String)
     }
     private lateinit var itemClickListener : OnItemClickListener
 
