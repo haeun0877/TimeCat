@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import db.CatUser
 import db.DBHelper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,10 +26,9 @@ class SecondActivity : AppCompatActivity() {
 
         val goals = helper.selectData()
         adapter.listData.addAll(goals)
-
         adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                Log.d("clicktest","야호ㅠㅠㅠ")
+                go_three()
             }
         })
 
@@ -41,7 +41,11 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
 
+    private fun go_three() {
+        var intent = Intent(this, DetailedGoalActivity::class.java)
+        startActivity(intent)
     }
 
 }
