@@ -96,33 +96,7 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.close()
     }
 
-    //데이터 조회 함수
-    /*
-    fun selectGoalNameData(goalName:String) : MutableList<CatUser>{
-        val list = mutableListOf<CatUser>()
-
-        val select = "select * from user where goal='$goalName'"
-        val rd = readableDatabase
-        val cursor = rd.rawQuery(select,null)
-
-        while(cursor.moveToNext()){
-            val id = cursor.getString(cursor.getColumnIndex("id"))
-            val name = cursor.getString(cursor.getColumnIndex("name"))
-            val goal = cursor.getString(cursor.getColumnIndex("goal"))
-            val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
-            val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
-            val time = cursor.getString(cursor.getColumnIndex("time"))
-            val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
-
-            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm)
-            list.add(user)
-        }
-        cursor.close()
-        rd.close()
-
-        return list
-    }
-     */
+    //데이터 조회 함수2
     fun selectGoalNameData(goalName:String) : CatUser {
         var user: CatUser = CatUser("","","","","","","")
 

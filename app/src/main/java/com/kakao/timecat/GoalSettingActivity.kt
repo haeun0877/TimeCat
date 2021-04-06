@@ -66,8 +66,10 @@ class GoalSettingActivity : AppCompatActivity() {
         alamOnOff.setOnCheckedChangeListener {_, isOn->
             if(isOn){
                 alarmOn="On"
+                alamOnOff.text="알람on"
             }else{
                 alarmOn="Off"
+                alamOnOff.text="알람off"
             }
         }
 
@@ -84,18 +86,20 @@ class GoalSettingActivity : AppCompatActivity() {
         //Toast.makeText(this, "${userId},${userNickname}", Toast.LENGTH_SHORT).show()
 
         var year1:Int=0
-        goalAdd.setOnClickListener{
-            if(!switchDate.isChecked)
-                goalTime="always"
+        goalAdd.setOnClickListener {
+            if (!switchDate.isChecked)
+                goalTime = "always"
 
-            var helper = DBHelper(this, DB_NAME, DB_VERSION)
-            var catUser = CatUser(userId,userNickname,goalName.text.toString(),goalTime,startTime,time,alarmOn)
-            helper.insertData(catUser)
+            if (goalName.length()<=0) {
+                Toast.makeText(this, "목표제목을 설정해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                var helper = DBHelper(this, DB_NAME, DB_VERSION)
+                var catUser = CatUser(userId, userNickname, goalName.text.toString(), goalTime, startTime, time, alarmOn)
+                helper.insertData(catUser)
 
-            var intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
-
-            Toast.makeText(this, "${goalTime}", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this, SecondActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

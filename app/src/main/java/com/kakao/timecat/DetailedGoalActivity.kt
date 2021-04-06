@@ -3,6 +3,7 @@ package com.kakao.timecat
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_detailed_goal.*
 
@@ -31,8 +32,13 @@ class DetailedGoalActivity : AppCompatActivity() {
             time.text=goals.time
             alarm.text=goals.alarm
         }
+
+        goalFinish.setOnClickListener{
+            mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
+        }
     }
 
+    //액티비티 종료시 애니메이션 없애는 함수
     override fun onPause() {
         super.onPause()
         overridePendingTransition(0, 0)

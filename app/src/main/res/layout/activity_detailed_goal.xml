@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/back2"
     android:orientation="vertical"
-    tools:context=".DetailedGoalActivity">
+    tools:context=".DetailedGoalActivity"
+    android:id="@+id/mainLayout">
 
     <TextView
         android:id="@+id/goalTitle"
