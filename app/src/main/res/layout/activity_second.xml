@@ -18,8 +18,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyler"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="130dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="120dp"
             tools:listitem="@layout/goal_item" />
 
         <Button
@@ -27,7 +27,7 @@
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="#773800"
             android:fontFamily="@font/binggreabold"
             android:text="목표 추가"

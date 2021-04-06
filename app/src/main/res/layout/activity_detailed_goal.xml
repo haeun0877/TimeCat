@@ -9,12 +9,133 @@
     tools:context=".DetailedGoalActivity">
 
     <TextView
-        android:id="@+id/imsi"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="디테일골3페이지"
+        android:id="@+id/goalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="목표제목"
+        android:textSize="40sp"
+        android:fontFamily="@font/binggreabold"
+        android:textColor="#1C0400"
         android:layout_gravity="center"
-        android:textSize="50sp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="110dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작날짜 : "
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000-00-00"
+            android:textSize="35sp"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목표날짜 : "
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/finalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000-00-00"
+            android:textSize="35sp"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_alarm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="invisible">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간 : "
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23:00"
+            android:textSize="35sp"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알람 : "
+            android:textSize="40sp"
+            android:fontFamily="@font/binggreabold"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"/>
+        <TextView
+            android:id="@+id/alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="on"
+            android:textSize="35sp"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/goalupdate"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#C37132"
+        android:fontFamily="@font/binggreabold"
+        android:text="목표 수정"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/goalFinish"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#773800"
+        android:fontFamily="@font/binggreabold"
+        android:text="목표 완수"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
 </LinearLayout>

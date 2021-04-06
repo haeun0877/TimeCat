@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kakao.sdk.user.UserApiClient
 import db.CatUser
 import db.DBHelper
 import java.text.SimpleDateFormat
@@ -21,10 +22,18 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        var userId:String = ""
+
         val helper = DBHelper(this, DB_NAME, DB_VERSION)
         val adapter = RecyclerAdapter()
 
-        val goals = helper.selectData()
+        UserApiClient.instance.me { user, error ->
+            userId = user?.id.toString()
+        }
+
+        Toast.makeText(this, "${userId}", Toast.LENGTH_SHORT).show()
+
+        val goals = helper.selectData(userId)
         adapter.listData.addAll(goals)
         adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, goalname:String) {

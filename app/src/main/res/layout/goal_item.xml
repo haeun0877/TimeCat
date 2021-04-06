@@ -10,7 +10,7 @@
         android:id="@+id/goal_title"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="55dp"
         android:background="#FFFFFF"
         android:backgroundTint="#C37132"
         android:fontFamily="@font/binggreabold"

@@ -78,7 +78,6 @@ class GoalSettingActivity : AppCompatActivity() {
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
             userNickname = user?.kakaoAccount?.profile?.nickname.toString()
-
         }
 
         //카카오 아이디,이름 불러오기 잘 작동됨
