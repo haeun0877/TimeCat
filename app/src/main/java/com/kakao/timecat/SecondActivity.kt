@@ -45,6 +45,7 @@ class SecondActivity : AppCompatActivity() {
 
         goalAdd.setOnClickListener{
             val intent = Intent(this, GoalSettingActivity::class.java)
+            intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
 
@@ -53,6 +54,7 @@ class SecondActivity : AppCompatActivity() {
     private fun go_three(goal:String) {
         var intent = Intent(this, DetailedGoalActivity::class.java)
         intent.putExtra("goalName","${goal}")
+        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent)
     }
 

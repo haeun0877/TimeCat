@@ -1,9 +1,8 @@
 package com.kakao.timecat
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import db.CatUser
+import androidx.appcompat.app.AppCompatActivity
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_detailed_goal.*
 
@@ -32,5 +31,10 @@ class DetailedGoalActivity : AppCompatActivity() {
             time.text=goals.time
             alarm.text=goals.alarm
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0, 0)
     }
 }
