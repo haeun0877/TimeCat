@@ -22,7 +22,7 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        var userId:String = ""
+        var userId="1674815800"
 
         val helper = DBHelper(this, DB_NAME, DB_VERSION)
         val adapter = RecyclerAdapter()
@@ -30,8 +30,6 @@ class SecondActivity : AppCompatActivity() {
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
         }
-
-        Toast.makeText(this, "${userId}", Toast.LENGTH_SHORT).show()
 
         val goals = helper.selectData(userId)
         adapter.listData.addAll(goals)

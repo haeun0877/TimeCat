@@ -1,6 +1,9 @@
 package com.kakao.timecat
 import android.app.Application;
+import android.content.Intent
+import android.widget.Toast
 import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.user.UserApiClient
 
 class KakaoApplication : Application() {
     override fun onCreate() {
