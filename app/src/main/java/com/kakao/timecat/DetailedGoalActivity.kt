@@ -39,6 +39,7 @@ class DetailedGoalActivity : AppCompatActivity() {
         goalFinish.setOnClickListener{
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
             helper.updateFinishDate(userId, goalName, "yes")
+            goalFinish.visibility=View.INVISIBLE
         }
 
         if(goals.finish=="yes"){
