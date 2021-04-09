@@ -51,8 +51,8 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //목표완수했을 때 메인화면의 버튼 색깔도 변경하는 부분
         var finishGoal = helper.selectFinish()
-
 
     }
 

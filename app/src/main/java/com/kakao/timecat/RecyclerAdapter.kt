@@ -1,6 +1,7 @@
 package com.kakao.timecat
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.system.Os.bind
 import android.util.Log
@@ -16,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import db.CatUser
 import kotlinx.android.synthetic.main.goal_item.view.*
 
+//리사이클러뷰 변경이 바로바로 적용되어야함
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), Filterable {
     val listData = mutableListOf<CatUser>()
+    private var searchList: List<CatUser>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -52,12 +55,40 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), Filt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun setGoal(catUser: CatUser){
             itemView.goal_title.text="${catUser.goal}"
-        }
 
+            if(catUser.finish=="yes"){
+                itemView.goal_title.setBackgroundColor(Color.parseColor("#F4C44C"))
+            }else{
+                itemView.goal_title.setBackgroundColor(Color.parseColor("#C37132"))
+            }
+        }
     }
 
     override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString()
+                if (charString.isEmpty()) {
+                    searchList=listData
+                } else {
+                    val filteredList = ArrayList<CatUser>()
+                    //이부분에서 원하는 데이터를 검색할 수 있음
+                    for (row in listData) {
+                        if (row.finish=="yes") {
+                            filteredList.add(row)
+                        }
+                    }
+                    searchList = filteredList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = searchList
+                return filterResults
+            }
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                searchList = filterResults.values as ArrayList<CatUser>
+                notifyDataSetChanged()
+            }
+        }
     }
 }
 

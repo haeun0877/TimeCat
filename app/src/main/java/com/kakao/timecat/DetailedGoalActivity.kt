@@ -17,16 +17,13 @@ class DetailedGoalActivity : AppCompatActivity() {
         val DB_VERSION = 1
 
         var helper = DBHelper(this, DB_NAME, DB_VERSION)
-        var goalName:String=""
         var userId="1674815800"
 
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
         }
 
-        if(intent.hasExtra("goalName")){
-            goalName = intent.getStringExtra("goalName").toString()
-        }
+        var goalName = intent.getStringExtra("goalName").toString()
 
         val goals = helper.selectGoalNameData(goalName)
         goalTitle.text = goals.goal
@@ -42,6 +39,14 @@ class DetailedGoalActivity : AppCompatActivity() {
         goalFinish.setOnClickListener{
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
             helper.updateFinishDate(userId, goalName, "yes")
+        }
+
+        if(goals.finish=="yes"){
+            mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
+            goalFinish.visibility=View.INVISIBLE
+        }else{
+            mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back2))
+            goalFinish.visibility=View.VISIBLE
         }
     }
 

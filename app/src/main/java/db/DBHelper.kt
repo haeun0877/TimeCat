@@ -100,7 +100,7 @@ class DBHelper(context: Context, name:String, version:Int)
 
     //데이터 조회 함수2
     fun selectGoalNameData(goalName:String) : CatUser {
-        var user: CatUser = CatUser("","","","","","","", finish = "")
+        var user: CatUser = CatUser("","","","","","","", "")
 
         val select = "select * from user where goal='$goalName'"
         val rd = readableDatabase
