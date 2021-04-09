@@ -3,14 +3,13 @@ package com.kakao.timecat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.kakao.sdk.user.UserApiClient
-import db.CatUser
 import db.DBHelper
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.synthetic.main.activity_second.*
 
@@ -22,6 +21,7 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        //**userId가 처음 초기화하는 값으로만 저장됨 (UserApiClient 함수안에서는 잘 작동하는데 나와선 변수안에 저장안됨**
         var userId="1674815800"
 
         val helper = DBHelper(this, DB_NAME, DB_VERSION)
@@ -48,7 +48,6 @@ class SecondActivity : AppCompatActivity() {
             intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
-
     }
 
     private fun go_three(goal:String) {

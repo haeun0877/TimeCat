@@ -3,13 +3,10 @@ package com.kakao.timecat
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.kakao.sdk.user.UserApiClient
@@ -24,6 +21,7 @@ import java.util.*
 class GoalSettingActivity : AppCompatActivity() {
     var goalTime:String = "always"
     var time:String="off"
+    var finish:String="no"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +84,7 @@ class GoalSettingActivity : AppCompatActivity() {
         //Toast.makeText(this, "${userId},${userNickname}", Toast.LENGTH_SHORT).show()
 
         var year1:Int=0
+
         goalAdd.setOnClickListener {
             if (!switchDate.isChecked)
                 goalTime = "always"
@@ -94,13 +93,15 @@ class GoalSettingActivity : AppCompatActivity() {
                 Toast.makeText(this, "목표제목을 설정해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 var helper = DBHelper(this, DB_NAME, DB_VERSION)
-                var catUser = CatUser(userId, userNickname, goalName.text.toString(), goalTime, startTime, time, alarmOn)
+                var catUser = CatUser(userId, userNickname, goalName.text.toString(), goalTime, startTime, time, alarmOn, finish)
                 helper.insertData(catUser)
 
                 var intent = Intent(this, SecondActivity::class.java)
                 startActivity(intent)
             }
         }
+
+
     }
 
     fun doCancel(cancel:Boolean){

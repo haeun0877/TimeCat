@@ -4,15 +4,15 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import androidx.core.content.contentValuesOf
+import com.kakao.timecat.GoalSettingActivity
 
-data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String)
+data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
 class DBHelper(context: Context, name:String, version:Int)
     : SQLiteOpenHelper(context, name, null, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, alarm text)"
+        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, alarm text, finish text)"
         db?.execSQL(create)
     }
 
@@ -33,6 +33,7 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
         values.put("alarm", catUser.alarm)
+        values.put("finish", catUser.finish)
 
         //db 넣기
         wd.insert("user",null,values)
@@ -57,8 +58,9 @@ class DBHelper(context: Context, name:String, version:Int)
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
             val time = cursor.getString(cursor.getColumnIndex("time"))
             val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
+            val finish = cursor.getString(cursor.getColumnIndex("finish"))
 
-            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm)
+            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm,finish)
             list.add(user)
         }
         cursor.close()
@@ -78,8 +80,8 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
         values.put("alarm", catUser.alarm)
+        values.put("finish", catUser.finish)
 
-        //whereClause 부분에서 어떤 컬럼값을 삭제할지 조건값을 넣음
         wd.update("user", values, "id = ${catUser.id}", null)
         wd.close()
     }
@@ -98,7 +100,7 @@ class DBHelper(context: Context, name:String, version:Int)
 
     //데이터 조회 함수2
     fun selectGoalNameData(goalName:String) : CatUser {
-        var user: CatUser = CatUser("","","","","","","")
+        var user: CatUser = CatUser("","","","","","","", finish = "")
 
         val select = "select * from user where goal='$goalName'"
         val rd = readableDatabase
@@ -112,13 +114,26 @@ class DBHelper(context: Context, name:String, version:Int)
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
             val time = cursor.getString(cursor.getColumnIndex("time"))
             val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
+            val finish = cursor.getString(cursor.getColumnIndex("finish"))
 
-            user = CatUser(id, name, goal, goaldate, startdate, time, alarm)
+            user = CatUser(id, name, goal, goaldate, startdate, time, alarm,finish)
         }
         cursor.close()
         rd.close()
 
         return user
+    }
+
+    //데이터 수정 함수2
+    fun updateFinishDate(catUser:CatUser){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("id", catUser.id)
+        values.put("goal", catUser.goal)
+        values.put("finish", catUser.finish)
+
+        wd.update("user", values, "id = ${catUser.id}", null)
+        wd.close()
     }
 
 }
