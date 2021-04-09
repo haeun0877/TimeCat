@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.kakao.sdk.user.UserApiClient
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_detailed_goal.*
 
@@ -12,11 +13,16 @@ class DetailedGoalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_goal)
 
-        val DB_NAME = "catdb.sql"
+        val DB_NAME = "catuserdb.sql"
         val DB_VERSION = 1
 
         var helper = DBHelper(this, DB_NAME, DB_VERSION)
         var goalName:String=""
+        var userId="1674815800"
+
+        UserApiClient.instance.me { user, error ->
+            userId = user?.id.toString()
+        }
 
         if(intent.hasExtra("goalName")){
             goalName = intent.getStringExtra("goalName").toString()
@@ -35,6 +41,7 @@ class DetailedGoalActivity : AppCompatActivity() {
 
         goalFinish.setOnClickListener{
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
+            helper.updateFinishDate(userId, goalName, "yes")
         }
     }
 

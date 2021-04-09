@@ -16,9 +16,10 @@ import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.time.LocalDate
 import java.util.*
 
-//goalTime 에러 -> 아무런 값도 안들어가고있음 !! 수정 필요 !!
-
 class GoalSettingActivity : AppCompatActivity() {
+    val DB_NAME = "catuserdb.sql"
+    val DB_VERSION = 1
+
     var goalTime:String = "always"
     var time:String="off"
     var finish:String="no"
@@ -28,8 +29,6 @@ class GoalSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
 
-        val DB_NAME = "catdb.sql"
-        val DB_VERSION = 1
         var userId:String = ""
         var userNickname:String = ""
         var startTime:String = ""

@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import db.CatUser
 import kotlinx.android.synthetic.main.goal_item.view.*
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), Filterable {
     val listData = mutableListOf<CatUser>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -52,6 +54,10 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             itemView.goal_title.text="${catUser.goal}"
         }
 
+    }
+
+    override fun getFilter(): Filter {
+        TODO("Not yet implemented")
     }
 }
 

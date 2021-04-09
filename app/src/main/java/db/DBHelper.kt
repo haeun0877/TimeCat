@@ -60,7 +60,7 @@ class DBHelper(context: Context, name:String, version:Int)
             val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
             val finish = cursor.getString(cursor.getColumnIndex("finish"))
 
-            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm,finish)
+            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm, finish)
             list.add(user)
         }
         cursor.close()
@@ -125,15 +125,30 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //데이터 수정 함수2
-    fun updateFinishDate(catUser:CatUser){
+    fun updateFinishDate(id:String, goal:String, finish:String){
         val wd = writableDatabase
         val values = ContentValues()
-        values.put("id", catUser.id)
-        values.put("goal", catUser.goal)
-        values.put("finish", catUser.finish)
+        values.put("goal", goal)
+        values.put("id", id)
+        values.put("finish", finish)
 
-        wd.update("user", values, "id = ${catUser.id}", null)
+        wd.update("user", values, "goal='$goal' and id='$id'", null)
         wd.close()
+    }
+
+    fun selectFinish() : MutableList<String>{
+        val list = mutableListOf<String>()
+        val select = "select * from user where finish='yes'"
+        val rd = readableDatabase
+        val cursor = rd.rawQuery(select,null)
+
+        while(cursor.moveToNext()){
+            list.add(cursor.getString(cursor.getColumnIndex("goal")))
+        }
+        cursor.close()
+        rd.close()
+
+        return list
     }
 
 }
