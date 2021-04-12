@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SecondActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyler"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
+            tools:listitem="@layout/goal_item" />
+
+        <Button
+            android:id="@+id/goalAdd"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#773800"
+            android:fontFamily="@font/binggreabold"
+            android:text="목표 추가"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <TextClock
+        android:id="@+id/timetext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/binggreabold"
+        android:format12Hour="HH:mm:ss"
+        android:textAlignment="center"
+        android:textColor="#1C0400"
+        android:textSize="80sp"
+        android:layout_weight="6"/>
+
+</LinearLayout>

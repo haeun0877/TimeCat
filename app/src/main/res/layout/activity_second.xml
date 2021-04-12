@@ -8,41 +8,51 @@
     android:background="@drawable/back3"
     tools:context=".SecondActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyler"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="120dp"
-            tools:listitem="@layout/goal_item" />
+        <ImageView
+            android:id="@+id/indicator0_iv_main"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/shape_circle_brown" />
 
-        <Button
-            android:id="@+id/goalAdd"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#773800"
-            android:fontFamily="@font/binggreabold"
-            android:text="목표 추가"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/indicator1_iv_main"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/indicator0_iv_main"
+            app:layout_constraintStart_toEndOf="@+id/indicator0_iv_main"
+            app:layout_constraintTop_toTopOf="@+id/indicator0_iv_main"
+            app:srcCompat="@drawable/shape_circle_gray" />
 
-    <TextClock
-        android:id="@+id/timetext"
+        <ImageView
+            android:id="@+id/indicator2_iv_main"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/indicator1_iv_main"
+            app:layout_constraintStart_toEndOf="@+id/indicator1_iv_main"
+            app:layout_constraintTop_toTopOf="@+id/indicator1_iv_main"
+            app:srcCompat="@drawable/shape_circle_gray" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/binggreabold"
-        android:format12Hour="HH:mm:ss"
-        android:textAlignment="center"
-        android:textColor="#1C0400"
-        android:textSize="80sp"
-        android:layout_weight="6"/>
+        android:background="#00FDFDFD" />
+
 
 </LinearLayout>

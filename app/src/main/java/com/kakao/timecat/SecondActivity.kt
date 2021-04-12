@@ -1,22 +1,23 @@
 package com.kakao.timecat
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.PagerAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import androidx.viewpager.widget.ViewPager
 import com.kakao.sdk.user.UserApiClient
 import db.DBHelper
-import java.util.*
 import kotlinx.android.synthetic.main.activity_second.*
+import java.util.*
+
 
 class SecondActivity : AppCompatActivity() {
     val DB_NAME = "catuserdb.sql"
     val DB_VERSION = 1
+
+    private val adapterview by lazy { ViewPagerAdapter(supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,34 +34,37 @@ class SecondActivity : AppCompatActivity() {
             userId = user?.id.toString()
         }
 
-        val goals = helper.selectData(userId)
-        adapter.listData.addAll(goals)
-        adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int, goalname:String) {
-                go_three(goalname)
+        viewpager.adapter=SecondActivity@adapterview
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(p0: Int) {
+
+            }
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+            }
+
+            override fun onPageSelected(p0: Int) {
+                indicator0_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_gray))
+                indicator1_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_gray))
+                indicator2_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_gray))
+
+                when(p0){
+                    0 -> indicator0_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_brown))
+                    1 -> indicator1_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_brown))
+                    2 -> indicator2_iv_main.setImageDrawable(getDrawable(R.drawable.shape_circle_brown))
+                }
             }
         })
-
-        recyler.adapter=adapter
-        recyler.layoutManager = LinearLayoutManager(this)
-
-        //목표추가 버튼 누를시 다른 페이지로 이동
-        goalAdd.setOnClickListener {
-            val intent = Intent(this, GoalSettingActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
 
         //목표완수했을 때 메인화면의 버튼 색깔도 변경하는 부분
         var finishGoal = helper.selectFinish()
 
     }
 
-    private fun go_three(goal:String) {
-        var intent = Intent(this, DetailedGoalActivity::class.java)
-        intent.putExtra("goalName","${goal}")
-        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent)
+    //액티비티 종료시 애니메이션 없애는 함수
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0, 0)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kakao.timecat
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,10 @@ class DetailedGoalActivity : AppCompatActivity() {
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
             helper.updateFinishDate(userId, goalName, "yes")
             goalFinish.visibility=View.INVISIBLE
+
+            var intent = Intent(this, SecondActivity::class.java)
+            intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
         }
 
         if(goals.finish=="yes"){

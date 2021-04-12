@@ -16,7 +16,8 @@
         android:gravity="center"
         android:text="목표"
         android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        />
 
 
 

@@ -12,8 +12,9 @@ class LodingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loding)
 
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-
+            var intent = Intent(this,  MainActivity::class.java)
+            intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
             finish()
         }, SPLASH_TIME_OUT)
     }

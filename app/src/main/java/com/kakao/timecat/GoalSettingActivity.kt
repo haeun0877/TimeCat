@@ -28,7 +28,6 @@ class GoalSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
-
         var userId:String = ""
         var userNickname:String = ""
         var startTime:String = ""
@@ -99,7 +98,6 @@ class GoalSettingActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
 
     }
 
