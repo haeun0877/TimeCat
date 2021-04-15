@@ -1,7 +1,9 @@
 package com.kakao.timecat
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,15 +17,15 @@ import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.util.*
 
 class DetailedGoalActivity : AppCompatActivity() {
+    val DB_NAME = "catuserdb.sql"
+    val DB_VERSION = 1
+
+    var helper = DBHelper(this, DB_NAME, DB_VERSION)
+    var userId="1674815800"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_goal)
-
-        val DB_NAME = "catuserdb.sql"
-        val DB_VERSION = 1
-
-        var helper = DBHelper(this, DB_NAME, DB_VERSION)
-        var userId="1674815800"
 
         var updateClick = 0
 
@@ -67,6 +69,7 @@ class DetailedGoalActivity : AppCompatActivity() {
                 timeupdate.visibility=View.VISIBLE
                 switchAlarm.visibility=View.VISIBLE
                 goalFinish.visibility=View.INVISIBLE
+                delete_button.visibility=View.VISIBLE
                 time_alarm_layout.visibility=View.VISIBLE
 
                 if(alarm.text=="off"){
@@ -90,9 +93,12 @@ class DetailedGoalActivity : AppCompatActivity() {
                         alarm.text = "off"
                     }
                 }
+
+                delete_button.setOnClickListener{
+                    makeAlertDialog()
+                }
             }else{
                 updateClick=0
-
                 helper.updateGoal(userId, goalTitle.text.toString(), goalFinish.text.toString(), time.text.toString(), alarm.text.toString())
                 startActivity(intent_second)
             }
@@ -130,7 +136,7 @@ class DetailedGoalActivity : AppCompatActivity() {
     }
 
     //목표날짜 설정하는 함수
-    fun makeGoalTime(year:Int, month:Int, day:Int){
+    private fun makeGoalTime(year:Int, month:Int, day:Int){
         var goalTime = "${year}-${month}-${day}"
         finalTime.text="${goalTime}"
     }
@@ -150,8 +156,23 @@ class DetailedGoalActivity : AppCompatActivity() {
     }
 
     //목표시간을 설정하는 함수
-    fun makeTimeText(hour:Int, minute:Int){
+    private fun makeTimeText(hour:Int, minute:Int){
         var timetext = "${hour}:${minute}"
         time.text="${timetext}"
     }
+
+    private fun makeAlertDialog(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("'${goalTitle.text.toString()}'를 삭제하시겠습니까?")
+        builder.setPositiveButton("삭제") { dialogInterface: DialogInterface, i: Int ->
+            helper.deleteGoal(userId,goalTitle.text.toString())
+            Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent_second = Intent(this, SecondActivity::class.java)
+            startActivity(intent_second)
+        }
+        builder.setNegativeButton("취소") { dialogInterface: DialogInterface, i: Int ->
+        }
+        builder.show()
+    }
+
 }

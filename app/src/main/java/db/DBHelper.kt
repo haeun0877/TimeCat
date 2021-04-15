@@ -166,4 +166,10 @@ class DBHelper(context: Context, name:String, version:Int)
         return list
     }
 
+    //사용자의 목표를 삭제하는 함수
+    fun deleteGoal(id:String, goal:String){
+        val wd = writableDatabase
+        wd.delete("user", "id='$id' and goal='$goal'",null)
+        wd.close()
+    }
 }
