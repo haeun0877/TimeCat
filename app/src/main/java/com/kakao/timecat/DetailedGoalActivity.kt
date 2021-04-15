@@ -1,13 +1,18 @@
 package com.kakao.timecat
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.kakao.sdk.user.UserApiClient
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_detailed_goal.*
+import kotlinx.android.synthetic.main.activity_goal_setting.*
+import java.util.*
 
 class DetailedGoalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +25,11 @@ class DetailedGoalActivity : AppCompatActivity() {
         var helper = DBHelper(this, DB_NAME, DB_VERSION)
         var userId="1674815800"
 
+        var updateClick = 0
+
+        var intent_second = Intent(this, SecondActivity::class.java)
+        intent_second.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
         }
@@ -30,11 +40,11 @@ class DetailedGoalActivity : AppCompatActivity() {
         goalTitle.text = goals.goal
         startTime.text = goals.startdate
         finalTime.text = goals.goaldate
+        time.text=goals.time
+        alarm.text=goals.alarm
 
         if(goals.time!="off"){
             time_alarm_layout.visibility= View.VISIBLE
-            time.text=goals.time
-            alarm.text=goals.alarm
         }
 
         goalFinish.setOnClickListener{
@@ -42,10 +52,52 @@ class DetailedGoalActivity : AppCompatActivity() {
             helper.updateFinishDate(userId, goalName, "yes")
             goalFinish.visibility=View.INVISIBLE
 
-            var intent = Intent(this, SecondActivity::class.java)
-            intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+            startActivity(intent_second)
         }
+
+        UserApiClient.instance.me { user, error ->
+            userId = user?.id.toString()
+        }
+
+        goalupdate.setOnClickListener{
+            updateClick+=1
+
+            if(updateClick<2){
+                dateupdate.visibility=View.VISIBLE
+                timeupdate.visibility=View.VISIBLE
+                switchAlarm.visibility=View.VISIBLE
+                goalFinish.visibility=View.INVISIBLE
+                time_alarm_layout.visibility=View.VISIBLE
+
+                if(alarm.text=="off"){
+                    switchAlarm.isChecked=false
+                }else{
+                    switchAlarm.isChecked=true
+                }
+
+                dateupdate.setOnClickListener{
+                    showDatePicker()
+                }
+                timeupdate.setOnClickListener{
+                    showTimePicker()
+                }
+
+                switchAlarm.setOnCheckedChangeListener{_, onSwitch ->
+                    if(onSwitch) {
+                        alarm.text = "On"
+                    }
+                    else{
+                        alarm.text = "off"
+                    }
+                }
+            }else{
+                updateClick=0
+
+                helper.updateGoal(userId, goalTitle.text.toString(), goalFinish.text.toString(), time.text.toString(), alarm.text.toString())
+                startActivity(intent_second)
+            }
+        }
+
 
         if(goals.finish=="yes"){
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
@@ -60,5 +112,46 @@ class DetailedGoalActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         overridePendingTransition(0, 0)
+    }
+
+    //데이트피커다이어로그 생성함수
+    private fun showDatePicker() {
+        val cal = Calendar.getInstance()
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, dat ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DATE, dat)
+
+            makeGoalTime(year, month+1, dat)
+        }
+
+        DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)). show()
+    }
+
+    //목표날짜 설정하는 함수
+    fun makeGoalTime(year:Int, month:Int, day:Int){
+        var goalTime = "${year}-${month}-${day}"
+        finalTime.text="${goalTime}"
+    }
+
+    //타임피커다이어로그 생성함수
+    private fun showTimePicker() {
+        val cal = Calendar.getInstance()
+
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+
+            makeTimeText(hour, minute)
+        }
+        TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+
+    }
+
+    //목표시간을 설정하는 함수
+    fun makeTimeText(hour:Int, minute:Int){
+        var timetext = "${hour}:${minute}"
+        time.text="${timetext}"
     }
 }

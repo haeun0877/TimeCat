@@ -155,5 +155,4 @@ class GoalSettingActivity : AppCompatActivity() {
         TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
 
     }
-
 }

@@ -98,7 +98,7 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.close()
     }
 
-    //데이터 조회 함수2
+    //목표이름으로 데이터 찾는 함수
     fun selectGoalNameData(goalName:String) : CatUser {
         var user: CatUser = CatUser("","","","","","","", "")
 
@@ -124,7 +124,7 @@ class DBHelper(context: Context, name:String, version:Int)
         return user
     }
 
-    //데이터 수정 함수2
+    //끝난 목표 정보를 수정하는 함수 (ex: finish)
     fun updateFinishDate(id:String, goal:String, finish:String){
         val wd = writableDatabase
         val values = ContentValues()
@@ -136,6 +136,21 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.close()
     }
 
+    //목표 수정 버튼을 눌렀을 때 목표 수정을 수행하는 함수
+    fun updateGoal(id:String, goal:String, goaldate:String, time:String, alarm:String){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("goal", goal)
+        values.put("id", id)
+        values.put("goaldate", goaldate)
+        values.put("time", time)
+        values.put("alarm", alarm)
+
+        wd.update("user", values, "goal='$goal' and id='$id'", null)
+        wd.close()
+    }
+
+    //달성한 목표들만 불러와서 리스트로 저장하는 함수
     fun selectFinish() : MutableList<String>{
         val list = mutableListOf<String>()
         val select = "select * from user where finish='yes'"
