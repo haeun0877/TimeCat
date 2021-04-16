@@ -14,18 +14,22 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:background="#FFFFFF"
-        android:src="@drawable/cat"
+        android:src="@drawable/cat3"
         android:textSize="40sp" />
 
     <TextView
+        android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/binggreabold"
         android:text="oo님"
-        android:textSize="34sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="38sp" />
+
+
 
 </LinearLayout>
