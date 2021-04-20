@@ -6,16 +6,13 @@ import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.user.UserApiClient
-import db.CatUser
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.time.LocalDate
@@ -28,6 +25,10 @@ class GoalSettingActivity : AppCompatActivity() {
     var goalTime:String = "always"
     var time:String="off"
     var finish:String="no"
+    var alarmOn:String="off"
+
+    var hour=0
+    var minute=0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +37,9 @@ class GoalSettingActivity : AppCompatActivity() {
         var userId:String = ""
         var userNickname:String = ""
         var startTime:String = ""
-        var alarmOn:String="off"
 
         //목표날짜 always, select중 고르는 스위치버튼
-        switchDate.setOnCheckedChangeListener{_, onSwitch ->
+        switchDate.setOnCheckedChangeListener{ _, onSwitch ->
             if(onSwitch) {
                 switchDate.text = "select"
                 showDatePicker()
@@ -64,7 +64,7 @@ class GoalSettingActivity : AppCompatActivity() {
         }
 
         //알람 on, onff중 고르는 스위치 버튼
-        alamOnOff.setOnCheckedChangeListener {_, isOn->
+        alamOnOff.setOnCheckedChangeListener { _, isOn->
             if(isOn){
                 alarmOn="On"
                 alamOnOff.text="알람on"
@@ -111,7 +111,7 @@ class GoalSettingActivity : AppCompatActivity() {
 
     }
 
-    fun doCancel(cancel:Boolean){
+    fun doCancel(cancel: Boolean){
         if(cancel){
             switchDate.isChecked=false
         }
@@ -125,16 +125,18 @@ class GoalSettingActivity : AppCompatActivity() {
     }
 
     //목표날짜 설정하는 함수
-    fun makeGoalTime(year:Int, month:Int, day:Int){
+    fun makeGoalTime(year: Int, month: Int, day: Int){
         goalTime = "${year}-${month}-${day}"
         goalTimeText.text="${goalTime}"
     }
 
     //목표시간을 설정하는 함수
-    fun makeTimeText(hour:Int, minute:Int){
+    fun makeTimeText(hour: Int, minute: Int){
         time = "${hour}:${minute}"
         resulttime.visibility=View.VISIBLE
         resulttime.text="${time} 시작"
+        this.hour=hour
+        this.minute=minute
     }
 
     //데이트피커다이어로그 생성함수
@@ -146,10 +148,14 @@ class GoalSettingActivity : AppCompatActivity() {
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DATE, dat)
 
-            makeGoalTime(year, month+1, dat)
+            makeGoalTime(year, month + 1, dat)
         }
 
-        DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)). show()
+        DatePickerDialog(
+            this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(
+                Calendar.DATE
+            )
+        ). show()
     }
 
     //타임피커다이어로그 생성함수
@@ -162,26 +168,54 @@ class GoalSettingActivity : AppCompatActivity() {
 
             makeTimeText(hour, minute)
         }
-        TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        TimePickerDialog(
+            this,
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
 
     }
 
     //알람생성함수
     private fun makeAlarm(){
-        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        var helper = DBHelper(this, DB_NAME, DB_VERSION)
+        var num = helper.selectNum(goalName.text.toString())
 
-        val intent = Intent(this, AlarmReciver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-                this, AlarmReciver.NOTIFICATION_ID, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT)
+        if(alarmOn=="On"){
+            val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
-        val triggerTime = (SystemClock.elapsedRealtime())
-        alarmManager.set(   // 5
+            val intent = Intent(this, AlarmReciver::class.java)
+            var pendingIntent = PendingIntent.getBroadcast(
+                this, num, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            val instance = Calendar.getInstance()
+            var year = instance.get(Calendar.YEAR)
+            var month = instance.get(Calendar.MONTH)+1
+            var date = instance.get(Calendar.DATE)
+
+            var calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, date)
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+            calendar.set(Calendar.MINUTE, minute)
+            calendar.set(Calendar.SECOND, 0)
+
+            val triggerTime = (SystemClock.elapsedRealtime())
+            //calendar.timeInMillis
+            alarmManager.set(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                triggerTime,
+                calendar.timeInMillis,
                 pendingIntent
-        )
-        //alarmManager.cancel(pendingIntent)->알람취소함수
+            )
 
+            Toast.makeText(this, "${calendar.timeInMillis}", Toast.LENGTH_LONG).show()
+        }
+
+        //alarmManager.cancel(pendingIntent)->알람취소함수
     }
 }

@@ -63,6 +63,18 @@
             android:textSize="34sp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:background="@drawable/kakao_button"
+        android:scaleType="fitCenter"
+        android:text="로그아웃"
+        android:gravity="center"
+        android:textColor="#401A01"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:src="@drawable/kakao_button" />
 
 
 </LinearLayout>

@@ -172,4 +172,22 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.delete("user", "id='$id' and goal='$goal'",null)
         wd.close()
     }
+
+    //컬럼이 몇번째에 있는지 int로 반환하는 함수
+    fun selectNum(goal:String) : Int{
+        val select = "select * from user"
+        val rd =readableDatabase
+        val cursor = rd.rawQuery(select,null)
+        var num=0
+
+        while(cursor.moveToNext()){
+            if(cursor.getString(cursor.getColumnIndex("goal"))==goal)
+                num=cursor.position
+        }
+
+        cursor.close()
+        rd.close()
+
+        return num
+    }
 }
