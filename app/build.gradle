@@ -47,6 +47,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.4.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'// 카카오내비
     implementation 'com.github.bumptech.glide:glide:4.11.0' //glide
+    implementation "androidx.work:work-runtime-ktx:2.4.0"//alarm
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

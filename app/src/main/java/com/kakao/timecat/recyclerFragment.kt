@@ -9,13 +9,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.internal.ContextUtils.getActivity
+import com.kakao.sdk.user.UserApiClient
+import db.CatUser
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.fragment_recycler.*
+
+data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
 class recyclerFragment : Fragment() {
     val DB_NAME = "catuserdb.sql"
@@ -33,23 +38,26 @@ class recyclerFragment : Fragment() {
         val adapter = RecyclerAdapter()
         val activityS = SecondActivity()
 
-        var userId="1674815800"
+        var userId=""
         var finish=""
+        var goals : MutableList<CatUser>
 
         val activityContext: Activity by lazy { activity as SecondActivity}
 
+        UserApiClient.instance.me { user, error ->
+            userId = user?.id.toString()
+            goals = helper.selectData(userId)
+            adapter.listData.addAll(goals)
 
+            adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
+                override fun onClick(v: View, position: Int, goalname:String) {
+                    go_three(goalname)
+                }
+            })
 
-        val goals = helper.selectData(userId)
-        adapter.listData.addAll(goals)
-        adapter.setItemClickListener(object : RecyclerAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int, goalname:String) {
-                go_three(goalname)
-            }
-        })
-
-        recyler.adapter=adapter
-        recyler.layoutManager = LinearLayoutManager(requireContext())
+            recyler.adapter=adapter
+            recyler.layoutManager = LinearLayoutManager(requireContext())
+        }
 
         //목표추가 버튼 누를시 다른 페이지로 이동
         goalAdd.setOnClickListener {

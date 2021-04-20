@@ -1,12 +1,17 @@
 package com.kakao.timecat
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
+import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.kakao.sdk.user.UserApiClient
@@ -84,6 +89,7 @@ class GoalSettingActivity : AppCompatActivity() {
         var year1:Int=0
 
         goalAdd.setOnClickListener {
+            /*
             if (!switchDate.isChecked)
                 goalTime = "always"
 
@@ -97,6 +103,10 @@ class GoalSettingActivity : AppCompatActivity() {
                 var intent = Intent(this, SecondActivity::class.java)
                 startActivity(intent)
             }
+
+             */
+
+            makeAlarm()
         }
 
     }
@@ -153,6 +163,25 @@ class GoalSettingActivity : AppCompatActivity() {
             makeTimeText(hour, minute)
         }
         TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+
+    }
+
+    //알람생성함수
+    private fun makeAlarm(){
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(this, AlarmReciver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+                this, AlarmReciver.NOTIFICATION_ID, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val triggerTime = (SystemClock.elapsedRealtime())
+        alarmManager.set(   // 5
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                triggerTime,
+                pendingIntent
+        )
+        //alarmManager.cancel(pendingIntent)->알람취소함수
 
     }
 }

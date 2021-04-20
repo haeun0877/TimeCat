@@ -23,17 +23,6 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        //**userId가 처음 초기화하는 값으로만 저장됨 (UserApiClient 함수안에서는 잘 작동하는데 나와선 변수안에 저장안됨**
-        var userId="1674815800"
-        var finish=""
-
-        val helper = DBHelper(this, DB_NAME, DB_VERSION)
-        val adapter = RecyclerAdapter()
-
-        UserApiClient.instance.me { user, error ->
-            userId = user?.id.toString()
-        }
-
         viewpager.adapter=SecondActivity@adapterview
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(p0: Int) {
@@ -55,10 +44,6 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         })
-
-        //목표완수했을 때 메인화면의 버튼 색깔도 변경하는 부분
-        var finishGoal = helper.selectFinish()
-
     }
 
     //액티비티 종료시 애니메이션 없애는 함수
