@@ -54,6 +54,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun setGoal(catUser: CatUser){
             itemView.goal_title.text="${catUser.goal}"
+            itemView.time.text="${catUser.time}"
 
             if(catUser.finish=="yes"){
                 itemView.goal_title.setBackgroundColor(Color.parseColor("#F4C44C"))

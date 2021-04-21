@@ -3,13 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".calendarFragment">
 
-    <CalendarView
-        android:id="@+id/calendar_view"
-        android:layout_width="match_parent"
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="#00FFFFFF"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        app:type="one_day_picker"
+        app:eventsEnabled="true"
+        app:headerColor="#C37132"
+        app:selectionColor="#F4C44C"
+        app:todayLabelColor="#C37132"/>
+
+    <TextView
+        android:id="@+id/date_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="2021-04-22"
+        android:fontFamily="@font/binggrea"
+        android:textColor="#1C0400"
+        android:textSize="58sp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 </LinearLayout>
