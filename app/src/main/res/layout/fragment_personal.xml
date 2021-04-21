@@ -66,14 +66,15 @@
     <Button
         android:id="@+id/logout"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         android:background="@drawable/kakao_button"
         android:scaleType="fitCenter"
         android:text="로그아웃"
         android:gravity="center"
         android:textColor="#401A01"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_gravity="center"
+        android:textStyle="bold"
         android:src="@drawable/kakao_button" />
 
 

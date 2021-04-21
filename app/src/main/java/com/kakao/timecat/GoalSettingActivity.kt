@@ -89,7 +89,7 @@ class GoalSettingActivity : AppCompatActivity() {
         var year1:Int=0
 
         goalAdd.setOnClickListener {
-            /*
+
             if (!switchDate.isChecked)
                 goalTime = "always"
 
@@ -103,8 +103,6 @@ class GoalSettingActivity : AppCompatActivity() {
                 var intent = Intent(this, SecondActivity::class.java)
                 startActivity(intent)
             }
-
-             */
 
             makeAlarm()
         }
@@ -209,7 +207,7 @@ class GoalSettingActivity : AppCompatActivity() {
             //calendar.timeInMillis
             alarmManager.set(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                calendar.timeInMillis,
+                triggerTime,
                 pendingIntent
             )
 

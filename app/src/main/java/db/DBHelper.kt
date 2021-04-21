@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.kakao.timecat.GoalSettingActivity
 
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
@@ -21,7 +20,7 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //데이터 입력 함수
-    fun insertData(catUser:CatUser){
+    fun insertData(catUser: com.kakao.timecat.CatUser){
         //db 가져오기
         val wd = writableDatabase
         //CatUser을 입력타입으로 변환시켜줌

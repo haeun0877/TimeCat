@@ -18,10 +18,9 @@ import db.CatUser
 import kotlinx.android.synthetic.main.goal_item.view.*
 
 //리사이클러뷰 변경이 바로바로 적용되어야함
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), Filterable {
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     val listData = mutableListOf<CatUser>()
-    private var searchList: List<CatUser>? = null
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.goal_item, parent, false)
@@ -64,31 +63,5 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), Filt
         }
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString()
-                if (charString.isEmpty()) {
-                    searchList=listData
-                } else {
-                    val filteredList = ArrayList<CatUser>()
-                    //이부분에서 원하는 데이터를 검색할 수 있음
-                    for (row in listData) {
-                        if (row.finish=="yes") {
-                            filteredList.add(row)
-                        }
-                    }
-                    searchList = filteredList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = searchList
-                return filterResults
-            }
-            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                searchList = filterResults.values as ArrayList<CatUser>
-                notifyDataSetChanged()
-            }
-        }
-    }
 }
 
