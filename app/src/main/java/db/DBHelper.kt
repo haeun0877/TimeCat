@@ -189,4 +189,14 @@ class DBHelper(context: Context, name:String, version:Int)
 
         return num
     }
+
+    //매일마다 수행된 목표들을 초기화
+    fun changeNotFinish(){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("finish", "no")
+
+        wd.update("user", values, "" , null)
+        wd.close()
+    }
 }

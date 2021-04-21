@@ -74,7 +74,6 @@
         android:textColor="#401A01"
         android:textSize="18sp"
         android:layout_gravity="center"
-        android:textStyle="bold"
         android:src="@drawable/kakao_button" />
 
 

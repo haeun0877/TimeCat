@@ -4,12 +4,14 @@ import android.app.Activity
 import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,7 @@ import db.CatUser
 import db.DBHelper
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.fragment_recycler.*
+import java.time.LocalDate
 
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
@@ -32,11 +35,14 @@ class recyclerFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recycler, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val helper = DBHelper(requireContext(), DB_NAME, DB_VERSION)
         val adapter = RecyclerAdapter()
         val activityS = SecondActivity()
+
+        var today = LocalDate.now()
 
         var userId=""
         var finish=""
@@ -57,6 +63,12 @@ class recyclerFragment : Fragment() {
 
             recyler.adapter=adapter
             recyler.layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        //매일마다 finish초기화
+        if(today!=LocalDate.now()){
+            today = LocalDate.now()
+            helper.changeNotFinish()
         }
 
         //목표추가 버튼 누를시 다른 페이지로 이동
