@@ -201,20 +201,20 @@ class DBHelper(context: Context, name:String, version:Int)
         wd.close()
     }
 
-    //달성한 목표들만 불러와서 리스트로 저장하는 함수
-    fun selectFinish() : MutableList<String>{
-        val list = mutableListOf<String>()
-        val select = "select * from user where finish='yes'"
+    //달성한 목표들만 불러와서 리스트로 저장하는 함수ArrayList<String>
+    fun selectFinish() :ArrayList<String>{
+        val arrayList = ArrayList<String>()
+        val select = "select * from user where finish= 'yes'"
         val rd = readableDatabase
         val cursor = rd.rawQuery(select,null)
 
         while(cursor.moveToNext()){
-            list.add(cursor.getString(cursor.getColumnIndex("goal")))
+            arrayList.add(cursor.getString(cursor.getColumnIndex("goal")))
         }
         cursor.close()
         rd.close()
 
-        return list
+        return arrayList
     }
 
     //사용자의 목표를 삭제하는 함수

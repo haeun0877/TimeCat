@@ -21,7 +21,7 @@ class DetailedGoalActivity : AppCompatActivity() {
     val DB_VERSION = 1
 
     var helper = DBHelper(this, DB_NAME, DB_VERSION)
-    var userId="1674815800"
+    var userId=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +55,6 @@ class DetailedGoalActivity : AppCompatActivity() {
             goalFinish.visibility=View.INVISIBLE
 
             startActivity(intent_second)
-
-            val fragment : calendarFragment = calendarFragment()
-            fragment.finishDay()
         }
 
         UserApiClient.instance.me { user, error ->
