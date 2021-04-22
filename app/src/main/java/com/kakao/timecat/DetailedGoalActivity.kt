@@ -55,6 +55,9 @@ class DetailedGoalActivity : AppCompatActivity() {
             goalFinish.visibility=View.INVISIBLE
 
             startActivity(intent_second)
+
+            val fragment : calendarFragment = calendarFragment()
+            fragment.finishDay()
         }
 
         UserApiClient.instance.me { user, error ->

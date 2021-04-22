@@ -30,6 +30,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:backgroundTint="#E6C087"
+            android:maxLength="10"
             android:fontFamily="@font/binggrea"
             android:privateImeOptions="defaultInputmode=korean"
             android:textColor="#1C0400"

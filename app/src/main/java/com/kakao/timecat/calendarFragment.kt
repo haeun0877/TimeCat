@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.time.LocalDate
 import java.util.*
 
-class calendarFragment : Fragment() {
 
+class calendarFragment : Fragment() {
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
             return inflater.inflate(R.layout.fragment_calendar, container, false)
@@ -28,5 +28,13 @@ class calendarFragment : Fragment() {
 
         var nowDate = LocalDate.now().toString()
         date_view.text="${nowDate}"
+    }
+
+    fun finishDay(){
+        val calendar = Calendar.getInstance()
+        var event = EventDay(calendar, R.drawable.cat)
+        val events: ArrayList<EventDay> = arrayListOf(event)
+        events.add(EventDay(calendar, R.drawable.cat))
+        calendarView.setEvents(events)
     }
 }
