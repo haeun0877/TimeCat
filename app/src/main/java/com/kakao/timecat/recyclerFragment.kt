@@ -26,7 +26,7 @@ import java.time.LocalDate
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
 class recyclerFragment : Fragment() {
-    val DB_NAME = "catuserdb.sql"
+    val DB_NAME = "catuserdb1.sql"
     val DB_VERSION = 1
     val activityContext: Activity by lazy { activity as SecondActivity }
 
@@ -42,7 +42,7 @@ class recyclerFragment : Fragment() {
         val adapter = RecyclerAdapter()
         val activityS = SecondActivity()
 
-        var today = LocalDate.now()
+        var today = ""
 
         var userId=""
         var finish=""
@@ -65,9 +65,18 @@ class recyclerFragment : Fragment() {
             recyler.layoutManager = LinearLayoutManager(requireContext())
         }
 
+        //calendar테이블에 day가 저장되어있는지 확인하고 오늘 날짜로 date를 update하는부분
+        if(!helper.dayExistOrNot()){
+            helper.insertDay(LocalDate.now().toString())
+        }
+        else{
+            helper.updateDay(LocalDate.now().toString())
+        }
+        today = helper.selectDay()
+
         //매일마다 finish초기화
-        if(today!=LocalDate.now()){
-            today = LocalDate.now()
+        if(today!=LocalDate.now().toString()){
+            helper.updateDay(LocalDate.now().toString())
             helper.changeNotFinish()
         }
 

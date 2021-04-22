@@ -12,7 +12,9 @@ class DBHelper(context: Context, name:String, version:Int)
 
     override fun onCreate(db: SQLiteDatabase?) {
         val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, alarm text, finish text)"
+        val createdate = "create table calendar (today text)"
         db?.execSQL(create)
+        db?.execSQL(createdate)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -39,6 +41,56 @@ class DBHelper(context: Context, name:String, version:Int)
 
         //db 닫기
         wd.close()
+    }
+
+    //오늘날짜입력
+    fun insertDay(today:String){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("today", today)
+        wd.insert("calendar",null,values)
+        wd.close()
+    }
+
+    //이미 저장된 day가 있는지 비교하는 함수
+    fun dayExistOrNot() : Boolean{
+        var dat_exist = false
+        var num=0
+        val select = "select * from calendar"
+        val rd =readableDatabase
+        val cursor = rd.rawQuery(select,null)
+
+        while(cursor.moveToNext()){
+            if(cursor.columnCount==num){
+                dat_exist=false
+            }else{
+                dat_exist=true
+            }
+        }
+        return dat_exist
+    }
+
+    //date가 이미 존재하면 오늘 날짜로 update하는 함수
+    fun updateDay(day:String){
+        val wd = writableDatabase
+        val values = ContentValues()
+        values.put("today",day)
+        wd.update("calendar", values, "", null)
+        wd.close()
+    }
+
+    //테이블에 저장되어있는 오늘 날짜를 불러오는함수
+    fun selectDay() : String{
+        val select = "select * from user "
+        val rd = readableDatabase
+        val cursor = rd.rawQuery(select,null)
+        var date = ""
+        while(cursor.moveToNext()) {
+            date = cursor.getString(cursor.getColumnIndex("today"))
+        }
+        cursor.close()
+        rd.close()
+        return date
     }
 
     //데이터 조회 함수

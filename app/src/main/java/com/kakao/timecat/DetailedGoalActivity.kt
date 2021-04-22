@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.util.*
 
 class DetailedGoalActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb.sql"
+    val DB_NAME = "catuserdb1.sql"
     val DB_VERSION = 1
 
     var helper = DBHelper(this, DB_NAME, DB_VERSION)
