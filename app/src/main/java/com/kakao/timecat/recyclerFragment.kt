@@ -67,15 +67,18 @@ class recyclerFragment : Fragment() {
 
         //calendar테이블에 day가 저장되어있는지 확인하고 오늘 날짜로 date를 update하는부분
         if(!helper.dayExistOrNot()){
+            Toast.makeText(this.context, "존재하지않음", Toast.LENGTH_SHORT).show()
             helper.insertDay(LocalDate.now().toString())
         }
         else{
+            Toast.makeText(this.context, "존재함", Toast.LENGTH_SHORT).show()
             helper.updateDay(LocalDate.now().toString())
+            today = helper.selectDay()
         }
-        today = helper.selectDay()
 
         //매일마다 finish초기화
         if(today!=LocalDate.now().toString()){
+            Toast.makeText(this.context, "실행됨", Toast.LENGTH_SHORT).show()
             helper.updateDay(LocalDate.now().toString())
             helper.changeNotFinish()
         }

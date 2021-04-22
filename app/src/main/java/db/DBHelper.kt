@@ -81,12 +81,12 @@ class DBHelper(context: Context, name:String, version:Int)
 
     //테이블에 저장되어있는 오늘 날짜를 불러오는함수
     fun selectDay() : String{
-        val select = "select * from user "
+        val select = "select * from calendar"
         val rd = readableDatabase
         val cursor = rd.rawQuery(select,null)
         var date = ""
         while(cursor.moveToNext()) {
-            date = cursor.getString(cursor.getColumnIndex("today"))
+                date = cursor.getString(cursor.getColumnIndex("today"))
         }
         cursor.close()
         rd.close()
