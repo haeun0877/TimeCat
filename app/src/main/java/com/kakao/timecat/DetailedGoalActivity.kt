@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.util.*
 
 class DetailedGoalActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb1.sql"
+    val DB_NAME = "catuserdb11.sql"
     val DB_VERSION = 1
 
     var helper = DBHelper(this, DB_NAME, DB_VERSION)
@@ -43,7 +43,6 @@ class DetailedGoalActivity : AppCompatActivity() {
         startTime.text = goals.startdate
         finalTime.text = goals.goaldate
         time.text=goals.time
-        alarm.text=goals.alarm
 
         if(goals.time!="off"){
             time_alarm_layout.visibility= View.VISIBLE
@@ -67,16 +66,9 @@ class DetailedGoalActivity : AppCompatActivity() {
             if(updateClick<2){
                 dateupdate.visibility=View.VISIBLE
                 timeupdate.visibility=View.VISIBLE
-                switchAlarm.visibility=View.VISIBLE
                 goalFinish.visibility=View.INVISIBLE
                 delete_button.visibility=View.VISIBLE
                 time_alarm_layout.visibility=View.VISIBLE
-
-                if(alarm.text=="off"){
-                    switchAlarm.isChecked=false
-                }else{
-                    switchAlarm.isChecked=true
-                }
 
                 dateupdate.setOnClickListener{
                     showDatePicker()
@@ -85,21 +77,12 @@ class DetailedGoalActivity : AppCompatActivity() {
                     showTimePicker()
                 }
 
-                switchAlarm.setOnCheckedChangeListener{_, onSwitch ->
-                    if(onSwitch) {
-                        alarm.text = "On"
-                    }
-                    else{
-                        alarm.text = "off"
-                    }
-                }
-
                 delete_button.setOnClickListener{
                     makeAlertDialog()
                 }
             }else{
                 updateClick=0
-                helper.updateGoal(userId, goalTitle.text.toString(), goalFinish.text.toString(), time.text.toString(), alarm.text.toString())
+                helper.updateGoal(userId, goalTitle.text.toString(), goalFinish.text.toString(), time.text.toString())
                 startActivity(intent_second)
             }
         }

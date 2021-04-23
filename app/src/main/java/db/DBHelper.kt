@@ -5,13 +5,13 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
+data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var finish:String)
 
 class DBHelper(context: Context, name:String, version:Int)
     : SQLiteOpenHelper(context, name, null, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, alarm text, finish text)"
+        val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, finish text)"
         val createdate = "create table calendar (today text)"
         db?.execSQL(create)
         db?.execSQL(createdate)
@@ -33,7 +33,6 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
-        values.put("alarm", catUser.alarm)
         values.put("finish", catUser.finish)
 
         //db 넣기
@@ -108,10 +107,9 @@ class DBHelper(context: Context, name:String, version:Int)
             val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
             val time = cursor.getString(cursor.getColumnIndex("time"))
-            val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
             val finish = cursor.getString(cursor.getColumnIndex("finish"))
 
-            val user = CatUser(id, name, goal, goaldate, startdate, time, alarm, finish)
+            val user = CatUser(id, name, goal, goaldate, startdate, time, finish)
             list.add(user)
         }
         cursor.close()
@@ -130,7 +128,6 @@ class DBHelper(context: Context, name:String, version:Int)
         values.put("goaldate", catUser.goaldate)
         values.put("startdate", catUser.startdate)
         values.put("time", catUser.time)
-        values.put("alarm", catUser.alarm)
         values.put("finish", catUser.finish)
 
         wd.update("user", values, "id = ${catUser.id}", null)
@@ -151,7 +148,7 @@ class DBHelper(context: Context, name:String, version:Int)
 
     //목표이름으로 데이터 찾는 함수
     fun selectGoalNameData(goalName:String) : CatUser {
-        var user: CatUser = CatUser("","","","","","","", "")
+        var user: CatUser = CatUser("","","","","","","")
 
         val select = "select * from user where goal='$goalName'"
         val rd = readableDatabase
@@ -164,10 +161,9 @@ class DBHelper(context: Context, name:String, version:Int)
             val goaldate = cursor.getString(cursor.getColumnIndex("goaldate"))
             val startdate = cursor.getString(cursor.getColumnIndex("startdate"))
             val time = cursor.getString(cursor.getColumnIndex("time"))
-            val alarm = cursor.getString(cursor.getColumnIndex("alarm"))
             val finish = cursor.getString(cursor.getColumnIndex("finish"))
 
-            user = CatUser(id, name, goal, goaldate, startdate, time, alarm,finish)
+            user = CatUser(id, name, goal, goaldate, startdate, time,finish)
         }
         cursor.close()
         rd.close()
@@ -188,14 +184,13 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //목표 수정 버튼을 눌렀을 때 목표 수정을 수행하는 함수
-    fun updateGoal(id:String, goal:String, goaldate:String, time:String, alarm:String){
+    fun updateGoal(id:String, goal:String, goaldate:String, time:String){
         val wd = writableDatabase
         val values = ContentValues()
         values.put("goal", goal)
         values.put("id", id)
         values.put("goaldate", goaldate)
         values.put("time", time)
-        values.put("alarm", alarm)
 
         wd.update("user", values, "goal='$goal' and id='$id'", null)
         wd.close()

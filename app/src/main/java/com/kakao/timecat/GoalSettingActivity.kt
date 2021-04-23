@@ -19,7 +19,7 @@ import java.time.LocalDate
 import java.util.*
 
 class GoalSettingActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb1.sql"
+    val DB_NAME = "catuserdb11.sql"
     val DB_VERSION = 1
 
     var goalTime:String = "always"
@@ -54,23 +54,10 @@ class GoalSettingActivity : AppCompatActivity() {
         switchOnOff.setOnCheckedChangeListener { _, isOn ->
             if(isOn){
                 switchOnOff.text="on"
-                alamOnOff.visibility=View.VISIBLE
                 showTimePicker()
             }else{
                 switchOnOff.text="off"
-                alamOnOff.visibility=View.INVISIBLE
                 resulttime.visibility=View.INVISIBLE
-            }
-        }
-
-        //알람 on, onff중 고르는 스위치 버튼
-        alamOnOff.setOnCheckedChangeListener { _, isOn->
-            if(isOn){
-                alarmOn="On"
-                alamOnOff.text="알람on"
-            }else{
-                alarmOn="Off"
-                alamOnOff.text="알람off"
             }
         }
 
@@ -103,8 +90,6 @@ class GoalSettingActivity : AppCompatActivity() {
                 var intent = Intent(this, SecondActivity::class.java)
                 startActivity(intent)
             }
-
-            makeAlarm()
         }
 
     }
@@ -176,44 +161,5 @@ class GoalSettingActivity : AppCompatActivity() {
 
     }
 
-    //알람생성함수
-    private fun makeAlarm(){
-        var helper = DBHelper(this, DB_NAME, DB_VERSION)
-        var num = helper.selectNum(goalName.text.toString())
 
-        if(alarmOn=="On"){
-            val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-
-            val intent = Intent(this, AlarmReciver::class.java)
-            var pendingIntent = PendingIntent.getBroadcast(
-                this, num, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-
-            val instance = Calendar.getInstance()
-            var year = instance.get(Calendar.YEAR)
-            var month = instance.get(Calendar.MONTH)+1
-            var date = instance.get(Calendar.DATE)
-
-            var calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, date)
-            calendar.set(Calendar.HOUR_OF_DAY, hour)
-            calendar.set(Calendar.MINUTE, minute)
-            calendar.set(Calendar.SECOND, 0)
-
-            val triggerTime = (SystemClock.elapsedRealtime())
-            //calendar.timeInMillis
-            alarmManager.set(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                triggerTime,
-                pendingIntent
-            )
-
-            Toast.makeText(this, "${calendar.timeInMillis}", Toast.LENGTH_LONG).show()
-        }
-
-        //alarmManager.cancel(pendingIntent)->알람취소함수
-    }
 }
