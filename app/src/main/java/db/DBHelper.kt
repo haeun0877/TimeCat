@@ -13,8 +13,10 @@ class DBHelper(context: Context, name:String, version:Int)
     override fun onCreate(db: SQLiteDatabase?) {
         val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, finish text)"
         val createdate = "create table calendar (today text)"
+        val createfinish = "create table finishday (id text, year text, month text, day text)"
         db?.execSQL(create)
         db?.execSQL(createdate)
+        db?.execSQL(createfinish)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

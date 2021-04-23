@@ -8,12 +8,14 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.applandeo.materialcalendarview.EventDay
 import db.DBHelper
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
+import java.lang.reflect.Array.set
 import java.time.LocalDate
 import java.util.*
 
@@ -47,12 +49,19 @@ class calendarFragment : Fragment() {
                 val calendar = Calendar.getInstance()
                 var event = EventDay(calendar, R.drawable.catt)
                 val events: ArrayList<EventDay> = arrayListOf(event)
-                events.add(event)
-
+                var calendarArr:ArrayList<Calendar> = ArrayList<Calendar>()
+                calendarArr.add(Calendar.getInstance())
+                calendarArr[0].set(2021,3,7)
+                calendarArr.add(Calendar.getInstance())
+                calendarArr[1].set(2021,3,18)
+                events.add(EventDay(calendarArr[0],  R.drawable.catt))
+                events.add(EventDay(calendarArr[1],  R.drawable.catt))
                 calendarView.setEvents(events)
+
             }
         }
 
     }
 
 }
+
