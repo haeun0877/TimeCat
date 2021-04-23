@@ -26,7 +26,7 @@ import java.time.LocalDate
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
 class recyclerFragment : Fragment() {
-    val DB_NAME = "catuserdb11.sql"
+    val DB_NAME = "catuserdb2.sql"
     val DB_VERSION = 1
     val activityContext: Activity by lazy { activity as SecondActivity }
 

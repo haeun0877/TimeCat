@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_goal_setting.*
 import java.util.*
 
 class DetailedGoalActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb11.sql"
+    val DB_NAME = "catuserdb2.sql"
     val DB_VERSION = 1
 
     var helper = DBHelper(this, DB_NAME, DB_VERSION)
@@ -49,6 +49,11 @@ class DetailedGoalActivity : AppCompatActivity() {
         }
 
         goalFinish.setOnClickListener{
+            if(helper.selectFinish().size<1){
+                val calendar:Calendar = Calendar.getInstance()
+                helper.insertFinishDay(userId, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH))
+            }
+
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))
             helper.updateFinishDate(userId, goalName, "yes")
             goalFinish.visibility=View.INVISIBLE

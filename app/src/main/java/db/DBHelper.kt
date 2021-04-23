@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var finish:String)
 
@@ -247,5 +249,45 @@ class DBHelper(context: Context, name:String, version:Int)
 
         wd.update("user", values, "" , null)
         wd.close()
+    }
+
+    //목표를 완수한 일을 저장하는 함수
+    fun insertFinishDay(userId:String ,year:Int, month:Int, day:Int){
+        //db 가져오기
+        val wd = writableDatabase
+        //CatUser을 입력타입으로 변환시켜줌
+        val values = ContentValues()
+        values.put("id", userId)
+        values.put("year", year)
+        values.put("month", month)
+        values.put("day", day)
+        //db 넣기
+        wd.insert("finishday",null,values)
+        //db 닫기
+        wd.close()
+    }
+
+    //끝낸날 조회 함수
+    fun selectDay(userId:String) : ArrayList<Calendar>{
+        val calendarArr:ArrayList<Calendar> = ArrayList<Calendar>()
+
+        val select = "select * from finishday where id = '$userId'"
+        val rd = readableDatabase
+        val cursor = rd.rawQuery(select,null)
+        var num=0
+
+        while(cursor.moveToNext()){
+            val year = cursor.getInt(cursor.getColumnIndex("year"))
+            val month = cursor.getInt(cursor.getColumnIndex("month"))
+            val day = cursor.getInt(cursor.getColumnIndex("day"))
+
+            calendarArr.add(Calendar.getInstance())
+            calendarArr[num].set(year,month,day)
+            num+=1
+        }
+        cursor.close()
+        rd.close()
+
+        return calendarArr
     }
 }

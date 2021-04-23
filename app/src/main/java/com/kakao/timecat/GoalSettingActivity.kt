@@ -19,7 +19,7 @@ import java.time.LocalDate
 import java.util.*
 
 class GoalSettingActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb11.sql"
+    val DB_NAME = "catuserdb2.sql"
     val DB_VERSION = 1
 
     var goalTime:String = "always"

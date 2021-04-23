@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.applandeo.materialcalendarview.EventDay
+import com.kakao.sdk.user.UserApiClient
 import db.DBHelper
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
@@ -21,7 +22,7 @@ import java.util.*
 
 
 class calendarFragment : Fragment() {
-    val DB_NAME = "catuserdb11.sql"
+    val DB_NAME = "catuserdb2.sql"
     val DB_VERSION = 1
 
     override fun onCreateView(
@@ -41,7 +42,22 @@ class calendarFragment : Fragment() {
         date_view.text="${nowDate}"
 
         val helper = DBHelper(requireContext(), DB_NAME, DB_VERSION)
+        var userId=""
 
+        UserApiClient.instance.me { user, error ->
+            userId = user?.id.toString()
+        }
+
+        val calendar = Calendar.getInstance()
+        var event = EventDay(calendar, R.drawable.catt)
+        val events: ArrayList<EventDay> = arrayListOf(event)
+        val calendarArr = helper.selectDay(userId)
+
+        for(i in 0..calendarArr.size-1){
+            events.add(EventDay(calendarArr[i],  R.drawable.catt))
+        }
+        calendarView.setEvents(events)
+        /*
         var size = helper.selectFinish().size
 
         if (size != null) {
@@ -60,6 +76,10 @@ class calendarFragment : Fragment() {
 
             }
         }
+
+         */
+
+
 
     }
 
