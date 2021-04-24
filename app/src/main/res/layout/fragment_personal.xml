@@ -35,15 +35,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월간 달성률 : "
+            android:fontFamily="@font/binggreabold"
+            android:textSize="34sp"/>
         <TextView
             android:id="@+id/month_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="월간 달성률 : "
-            android:layout_weight="1"
-            android:gravity="center"
-            android:fontFamily="@font/binggreabold"
+            android:text=""
+            android:fontFamily="@font/binggrea"
             android:textSize="34sp"/>
     </LinearLayout>
 
@@ -51,15 +56,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주간 달성률 : "
+            android:gravity="center"
+            android:fontFamily="@font/binggreabold"
+            android:textSize="34sp"/>
         <TextView
             android:id="@+id/week_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주간 달성률 : "
-            android:layout_weight="1"
-            android:gravity="center"
-            android:fontFamily="@font/binggreabold"
+            android:text=""
+            android:fontFamily="@font/binggrea"
             android:textSize="34sp"/>
     </LinearLayout>
 

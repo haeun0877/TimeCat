@@ -43,6 +43,9 @@ class personalFragment : Fragment() {
                 startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
+
+        week_goal.text=""
+        month_goal.text=""
     }
 
 }

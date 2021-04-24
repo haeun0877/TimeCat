@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -30,7 +31,6 @@ class GoalSettingActivity : AppCompatActivity() {
     var hour=0
     var minute=0
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
@@ -138,7 +138,9 @@ class GoalSettingActivity : AppCompatActivity() {
             this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(
                 Calendar.DATE
             )
-        ). show()
+        ).apply {
+            datePicker.minDate = System.currentTimeMillis()
+        }. show()
     }
 
     //타임피커다이어로그 생성함수
