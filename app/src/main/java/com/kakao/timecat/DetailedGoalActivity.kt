@@ -51,7 +51,7 @@ class DetailedGoalActivity : AppCompatActivity() {
         goalFinish.setOnClickListener{
             if(helper.selectFinish().size<1){
                 val calendar:Calendar = Calendar.getInstance()
-                helper.insertFinishDay(userId, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH))
+                helper.insertFinishDay(userId, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH))
             }
 
             mainLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.back1))

@@ -44,42 +44,18 @@ class calendarFragment : Fragment() {
         val helper = DBHelper(requireContext(), DB_NAME, DB_VERSION)
         var userId=""
 
+        val events: ArrayList<EventDay> = ArrayList<EventDay>()
+        var calendarArr = ArrayList<Calendar>()
+
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
-        }
 
-        val calendar = Calendar.getInstance()
-        var event = EventDay(calendar, R.drawable.catt)
-        val events: ArrayList<EventDay> = arrayListOf(event)
-        val calendarArr = helper.selectDay(userId)
-
-        for(i in 0..calendarArr.size-1){
-            events.add(EventDay(calendarArr[i],  R.drawable.catt))
-        }
-        calendarView.setEvents(events)
-        /*
-        var size = helper.selectFinish().size
-
-        if (size != null) {
-            if(size>0){
-                val calendar = Calendar.getInstance()
-                var event = EventDay(calendar, R.drawable.catt)
-                val events: ArrayList<EventDay> = arrayListOf(event)
-                var calendarArr:ArrayList<Calendar> = ArrayList<Calendar>()
-                calendarArr.add(Calendar.getInstance())
-                calendarArr[0].set(2021,3,7)
-                calendarArr.add(Calendar.getInstance())
-                calendarArr[1].set(2021,3,18)
-                events.add(EventDay(calendarArr[0],  R.drawable.catt))
-                events.add(EventDay(calendarArr[1],  R.drawable.catt))
-                calendarView.setEvents(events)
-
+            calendarArr = helper.selectDay(userId)
+            for(i in 0 until (calendarArr.size)){
+                events.add(EventDay(calendarArr[i],  R.drawable.catt))
             }
+            calendarView.setEvents(events)
         }
-
-         */
-
-
 
     }
 
