@@ -9,11 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat.from
+import com.applandeo.materialcalendarview.EventDay
 import com.bumptech.glide.Glide
 import com.kakao.sdk.user.UserApiClient
+import db.DBHelper
 import kotlinx.android.synthetic.main.fragment_personal.*
+import java.util.*
 
 class personalFragment : Fragment() {
+    val DB_NAME = "catuserdb0.sql"
+    val DB_VERSION = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +30,11 @@ class personalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val events: ArrayList<EventDay> = ArrayList<EventDay>()
+        var calendarArr = ArrayList<Calendar>()
+
+        val helper = DBHelper(requireContext(), DB_NAME, DB_VERSION)
+
         UserApiClient.instance.me { user, error ->
             if(user?.kakaoAccount?.profile?.profileImageUrl!=null){
                 Glide.with(this).load(user?.kakaoAccount?.profile?.profileImageUrl).into(imageView)
@@ -32,6 +42,10 @@ class personalFragment : Fragment() {
                 Glide.with(this).load(R.drawable.cat3).into(imageView)
             }
 
+            var userId = user?.id.toString()
+            calendarArr = helper.selectFinishDay(userId)
+
+            sticker_num.text="${calendarArr.size}개"
             nickname.text = user?.kakaoAccount?.profile?.nickname +"님"
         }
 
@@ -43,9 +57,6 @@ class personalFragment : Fragment() {
                 startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
-
-        week_goal.text=""
-        month_goal.text=""
     }
 
 }

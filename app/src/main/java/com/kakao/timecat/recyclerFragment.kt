@@ -26,7 +26,7 @@ import java.time.LocalDate
 data class CatUser(var id:String, var name:String, var goal:String, var goaldate:String, var startdate:String, var time:String, var alarm:String, var finish:String)
 
 class recyclerFragment : Fragment() {
-    val DB_NAME = "catuserdb2.sql"
+    val DB_NAME = "catuserdb0.sql"
     val DB_VERSION = 1
     val activityContext: Activity by lazy { activity as SecondActivity }
 
@@ -65,19 +65,19 @@ class recyclerFragment : Fragment() {
             recyler.layoutManager = LinearLayoutManager(requireContext())
 
             helper.deleteFinishDate(userId)
-        }
 
-        //calendar테이블에 day가 저장되어있는지 확인하고 오늘 날짜로 date를 update하는부분
-        if(!helper.dayExistOrNot()){
-            helper.insertDay(LocalDate.now().toString())
-        }
-        else{
-            today = helper.selectDay()
-            if(today!=LocalDate.now().toString()){
-                helper.updateDay(LocalDate.now().toString())
-                helper.changeNotFinish()
+            //calendar테이블에 day가 저장되어있는지 확인하고 오늘 날짜로 date를 update하는부분
+            if(!helper.dayExistOrNot(userId)){
+                helper.insertDay(userId,LocalDate.now().toString())
             }
-            helper.updateDay(LocalDate.now().toString())
+            else{
+                today = helper.selectDay(userId)
+                if(today!=LocalDate.now().toString()){
+                    helper.updateDay(userId,LocalDate.now().toString())
+                    helper.changeNotFinish()
+                }
+                helper.updateDay(userId,LocalDate.now().toString())
+            }
         }
 
         //목표추가 버튼 누를시 다른 페이지로 이동

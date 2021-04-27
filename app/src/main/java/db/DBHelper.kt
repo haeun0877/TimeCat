@@ -14,7 +14,7 @@ class DBHelper(context: Context, name:String, version:Int)
 
     override fun onCreate(db: SQLiteDatabase?) {
         val create = "create table user (id text, name text, goal text, goaldate text, startdate text, time text, finish text)"
-        val createdate = "create table calendar (today text)"
+        val createdate = "create table calendar (id text, today text)"
         val createfinish = "create table finishday (id text, year text, month text, day text)"
         db?.execSQL(create)
         db?.execSQL(createdate)
@@ -47,19 +47,20 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //오늘날짜입력
-    fun insertDay(today:String){
+    fun insertDay(id:String, today:String){
         val wd = writableDatabase
         val values = ContentValues()
         values.put("today", today)
+        values.put("id", id)
         wd.insert("calendar",null,values)
         wd.close()
     }
 
     //이미 저장된 day가 있는지 비교하는 함수
-    fun dayExistOrNot() : Boolean{
+    fun dayExistOrNot(id:String) : Boolean{
         var dat_exist = false
         var num=0
-        val select = "select * from calendar"
+        val select = "select * from calendar where id = '$id'"
         val rd =readableDatabase
         val cursor = rd.rawQuery(select,null)
 
@@ -74,17 +75,17 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //date가 이미 존재하면 오늘 날짜로 update하는 함수
-    fun updateDay(day:String){
+    fun updateDay(id:String,day:String){
         val wd = writableDatabase
         val values = ContentValues()
         values.put("today",day)
-        wd.update("calendar", values, "", null)
+        wd.update("calendar", values, "id='$id'", null)
         wd.close()
     }
 
     //테이블에 저장되어있는 오늘 날짜를 불러오는함수
-    fun selectDay() : String{
-        val select = "select * from calendar"
+    fun selectDay(id:String) : String{
+        val select = "select * from calendar where id='$id'"
         val rd = readableDatabase
         val cursor = rd.rawQuery(select,null)
         var date = ""
@@ -280,7 +281,7 @@ class DBHelper(context: Context, name:String, version:Int)
     }
 
     //끝낸날 조회 함수
-    fun selectDay(userId:String) : ArrayList<Calendar>{
+    fun selectFinishDay(userId:String) : ArrayList<Calendar>{
         val calendarArr:ArrayList<Calendar> = ArrayList<Calendar>()
 
         val select = "select * from finishday where id = '$userId'"
@@ -302,4 +303,5 @@ class DBHelper(context: Context, name:String, version:Int)
 
         return calendarArr
     }
+
 }

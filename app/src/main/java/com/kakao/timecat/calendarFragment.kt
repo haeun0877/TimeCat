@@ -22,7 +22,7 @@ import java.util.*
 
 
 class calendarFragment : Fragment() {
-    val DB_NAME = "catuserdb2.sql"
+    val DB_NAME = "catuserdb0.sql"
     val DB_VERSION = 1
 
     override fun onCreateView(
@@ -50,10 +50,12 @@ class calendarFragment : Fragment() {
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
 
-            calendarArr = helper.selectDay(userId)
+            calendarArr = helper.selectFinishDay(userId)
             for(i in 0 until (calendarArr.size)){
                 events.add(EventDay(calendarArr[i],  R.drawable.catt))
             }
+
+            Toast.makeText(this.context,"${userId}, ${calendarArr.size}",Toast.LENGTH_LONG).show()
             calendarView.setEvents(events)
         }
 

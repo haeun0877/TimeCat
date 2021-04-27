@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:background="#FFFFFF"
         android:src="@drawable/cat3"
         android:textSize="40sp" />
@@ -40,11 +40,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="월간 달성률 : "
+            android:text="스티커 수 : "
             android:fontFamily="@font/binggreabold"
             android:textSize="34sp"/>
         <TextView
-            android:id="@+id/month_goal"
+            android:id="@+id/sticker_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -52,27 +52,6 @@
             android:textSize="34sp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="주간 달성률 : "
-            android:gravity="center"
-            android:fontFamily="@font/binggreabold"
-            android:textSize="34sp"/>
-        <TextView
-            android:id="@+id/week_goal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:fontFamily="@font/binggrea"
-            android:textSize="34sp"/>
-    </LinearLayout>
 
     <Button
         android:id="@+id/logout"

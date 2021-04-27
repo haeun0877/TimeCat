@@ -14,7 +14,7 @@ import java.util.*
 
 
 class SecondActivity : AppCompatActivity() {
-    val DB_NAME = "catuserdb2.sql"
+    val DB_NAME = "catuserdb0.sql"
     val DB_VERSION = 1
 
     private val adapterview by lazy { ViewPagerAdapter(supportFragmentManager) }
