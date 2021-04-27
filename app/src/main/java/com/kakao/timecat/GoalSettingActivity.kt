@@ -31,6 +31,7 @@ class GoalSettingActivity : AppCompatActivity() {
     var hour=0
     var minute=0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goal_setting)
@@ -61,9 +62,11 @@ class GoalSettingActivity : AppCompatActivity() {
             }
         }
 
-
-        var nowTime : LocalDate = LocalDate.now()
-        startTime = nowTime.toString()
+        val cal = Calendar.getInstance()
+        var year = cal.get(Calendar.YEAR).toString()
+        var month = cal.get(Calendar.MONTH)+1
+        var day = cal.get(Calendar.DATE)
+        startTime = "${year}-${month}-${day}"
 
         UserApiClient.instance.me { user, error ->
             userId = user?.id.toString()
