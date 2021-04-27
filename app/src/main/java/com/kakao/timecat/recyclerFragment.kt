@@ -63,6 +63,8 @@ class recyclerFragment : Fragment() {
 
             recyler.adapter=adapter
             recyler.layoutManager = LinearLayoutManager(requireContext())
+
+            helper.deleteFinishDate(userId)
         }
 
         //calendar테이블에 day가 저장되어있는지 확인하고 오늘 날짜로 date를 update하는부분

@@ -216,6 +216,18 @@ class DBHelper(context: Context, name:String, version:Int)
         return arrayList
     }
 
+    //목표달성날짜가 오늘인것을 삭제하는 함수
+    fun deleteFinishDate(id:String){
+        val wd = writableDatabase
+        val cal = Calendar.getInstance()
+        var year = cal.get(Calendar.YEAR).toString()
+        var month = cal.get(Calendar.MONTH+1).toString()
+        var day = cal.get(Calendar.DATE).toString()
+        var today = "${year}-${month}-${day}"
+        wd.delete("user", "id='$id' and goaldate='$today'",null)
+        wd.close()
+    }
+
     //사용자의 목표를 삭제하는 함수
     fun deleteGoal(id:String, goal:String){
         val wd = writableDatabase
