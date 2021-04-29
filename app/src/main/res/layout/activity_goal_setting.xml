@@ -8,84 +8,111 @@
     android:background="@drawable/back2"
     tools:context=".GoalSettingActivity">
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="120dp">
+        android:layout_height="wrap_content"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:layout_marginTop="110dp"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="목표제목"
-            android:textSize="40sp"
+            android:text="목표제목  "
+            app:scale_height="200"
+            app:scale_width="300"
+            app:scale_left="60"
+            app:scale_textsize="100"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"/>
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/goalName"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_height="200"
+            app:scale_width="600"
+            app:scale_left="360"
+            app:scale_textsize="100"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
             android:backgroundTint="#E6C087"
             android:maxLength="10"
             android:fontFamily="@font/binggrea"
             android:privateImeOptions="defaultInputmode=korean"
-            android:textColor="#1C0400"
-            android:textSize="30sp" />
-    </LinearLayout>
+            android:textColor="#1C0400" />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="wrap_content"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="목표달성일"
-            android:textSize="40sp"
+            app:scale_height="200"
+            app:scale_width="330"
+            app:scale_left="60"
+            app:scale_textsize="100"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"/>
+            android:layout_gravity="center"/>
 
         <Switch
             android:id="@+id/switchDate"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:text="always"
+            app:scale_height="200"
+            app:scale_width="280"
+            app:scale_left="420"
+            app:scale_textsize="60"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:textSize="24sp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"/>
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/goalTimeText"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textSize="24sp"
+            app:scale_height="200"
+            app:scale_width="280"
+            app:scale_left="700"
+            app:scale_textsize="60"
+            android:gravity="center"
             android:fontFamily="@font/binggrea"
             android:textColor="#1C0400"
             android:layout_gravity="center"/>
 
-    </LinearLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="wrap_content"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시간설정"
-            android:textSize="40sp"
+            app:scale_height="200"
+            app:scale_width="330"
+            app:scale_left="60"
+            app:scale_textsize="100"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"/>
+            android:layout_gravity="center"/>
 
         <Switch
             android:id="@+id/switchOnOff"
@@ -94,34 +121,51 @@
             android:text="off"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:textSize="24sp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"/>
+            app:scale_height="200"
+            app:scale_width="280"
+            app:scale_left="420"
+            app:scale_textsize="60"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/resulttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:visibility="invisible"
             android:text="00:00"
             android:fontFamily="@font/binggrea"
             android:textColor="#1C0400"
-            android:textSize="30sp"
+            app:scale_height="200"
+            app:scale_width="280"
+            app:scale_left="700"
+            app:scale_textsize="60"
+            android:gravity="center"
             android:layout_gravity="center"/>
 
-    </LinearLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <Button
-        android:id="@+id/goalAdd"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#773800"
-        android:fontFamily="@font/binggreabold"
-        android:text="목표 추가"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:scale_base_height="400"
+        app:scale_base_width="1080"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/goalAdd"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            app:scale_height="180"
+            app:scale_width="850"
+            app:scale_left="120"
+            app:scale_top="100"
+            app:scale_textsize="100"
+            android:layout_gravity="center"
+            android:backgroundTint="#773800"
+            android:fontFamily="@font/binggreabold"
+            android:text="목표 추가"
+            android:textColor="#FFFFFF" />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>

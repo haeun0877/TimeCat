@@ -12,7 +12,8 @@
     <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scale_base_height="1900"
+        android:layout_marginTop="150dp"
+        app:scale_base_height="200"
         app:scale_base_width="1080"
         android:gravity="center">
 
@@ -23,11 +24,20 @@
             android:fontFamily="@font/binggreabold"
             app:scale_width="1080"
             app:scale_height="200"
-            app:scale_top="390"
-            app:scale_textsize="200"
+            app:scale_textsize="160"
             android:text="타임캣"
             android:gravity="center"
             android:textColor="#401A01"/>
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/textView"
@@ -37,10 +47,18 @@
             app:scale_width="1080"
             app:scale_height="100"
             app:scale_textsize="50"
-            app:scale_top="1200"
             android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:text="--------------------- 간편로그인 ---------------------" />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/login"
@@ -48,7 +66,6 @@
             android:layout_height="wrap_content"
             app:scale_width="1080"
             app:scale_height="120"
-            app:scale_top="1400"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
             android:src="@drawable/kakao_login_large_wide" />
