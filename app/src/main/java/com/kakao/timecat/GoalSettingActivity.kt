@@ -73,9 +73,6 @@ class GoalSettingActivity : AppCompatActivity() {
             userNickname = user?.kakaoAccount?.profile?.nickname.toString()
         }
 
-        //카카오 아이디,이름 불러오기 잘 작동됨
-        //Toast.makeText(this, "${userId},${userNickname}", Toast.LENGTH_SHORT).show()
-
         var year1:Int=0
 
         goalAdd.setOnClickListener {

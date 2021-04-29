@@ -9,58 +9,75 @@
     tools:context=".DetailedGoalActivity"
     android:id="@+id/mainLayout">
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        app:scale_base_height="200"
+        app:scale_base_width="1080"
+        android:layout_marginTop="110dp"
         android:gravity="center">
         <TextView
             android:id="@+id/goalTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="목표제목"
-            android:textSize="50sp"
+            app:scale_textsize="130"
+            app:scale_width="1080"
+            app:scale_height="200"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
             android:gravity="center"
             android:layout_gravity="center"/>
 
-    </LinearLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        app:scale_base_height="150"
+        app:scale_base_width="1080"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시작날짜 : "
-            android:textSize="38sp"
+            app:scale_textsize="100"
+            app:scale_left="120"
+            app:scale_width="350"
+            app:scale_height="150"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="50dp"/>
+            android:layout_gravity="center"/>
         <TextView
             android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000-00-00"
-            android:textSize="32sp"
+            app:scale_textsize="100"
+            app:scale_left="450"
+            app:scale_width="500"
+            app:scale_height="150"
+            android:gravity="center"
             android:fontFamily="@font/binggrea"
-            android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"/>
-    </LinearLayout>
+            android:textColor="#1C0400"/>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content"
+        app:scale_base_height="150"
+        app:scale_base_width="1080">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="목표날짜 : "
-            android:textSize="38sp"
+            app:scale_textsize="100"
+            app:scale_left="120"
+            app:scale_width="350"
+            app:scale_height="150"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:textColor="#1C0400"
             android:layout_gravity="center"
@@ -70,24 +87,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000-00-00"
-            android:textSize="32sp"
+            app:scale_textsize="100"
+            app:scale_left="450"
+            app:scale_width="500"
+            app:scale_height="150"
+            android:gravity="center"
             android:fontFamily="@font/binggrea"
-            android:textColor="#1C0400"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"/>
+            android:textColor="#1C0400"/>
         <Button
             android:id="@+id/dateupdate"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="수정"
-            android:textSize="20sp"
+            app:scale_textsize="50"
+            app:scale_left="950"
+            app:scale_width="130"
+            app:scale_height="100"
+            app:scale_top="25"
+            android:gravity="center"
             android:fontFamily="@font/binggreabold"
             android:layout_marginLeft="10dp"
             android:backgroundTint="#C37132"
             android:visibility="invisible"/>
 
-    </LinearLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
     <LinearLayout
         android:id="@+id/time_alarm_layout"
@@ -95,14 +119,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="invisible">
-        <LinearLayout
+        <com.ssomai.android.scalablelayout.ScalableLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="wrap_content"
+            app:scale_base_height="150"
+            app:scale_base_width="1080">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="시간 : "
-                android:textSize="38sp"
+                app:scale_textsize="100"
+                app:scale_left="120"
+                app:scale_width="200"
+                app:scale_height="150"
+                android:gravity="center"
                 android:fontFamily="@font/binggreabold"
                 android:textColor="#1C0400"
                 android:layout_gravity="center"
@@ -112,58 +142,86 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="23:00"
-                android:textSize="32sp"
+                app:scale_textsize="100"
+                app:scale_left="320"
+                app:scale_width="250"
+                app:scale_height="150"
+                android:gravity="center"
                 android:fontFamily="@font/binggrea"
                 android:textColor="#1C0400"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"/>
+
             <Button
                 android:id="@+id/timeupdate"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="수정"
-                android:textSize="20sp"
-                android:fontFamily="@font/binggreabold"
-                android:layout_marginLeft="10dp"
                 android:backgroundTint="#C37132"
-                android:visibility="invisible"/>
-        </LinearLayout>
+                android:fontFamily="@font/binggreabold"
+                android:text="수정"
+                android:visibility="invisible"
+                app:scale_height="100"
+                app:scale_left="580"
+                app:scale_textsize="50"
+                app:scale_top="25"
+                app:scale_width="130" />
+        </com.ssomai.android.scalablelayout.ScalableLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/goalupdate"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#C37132"
-        android:fontFamily="@font/binggreabold"
-        android:text="목표 수정"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:gravity="center"
+        app:scale_base_height="600"
+        app:scale_base_width="1080">
 
-    <Button
-        android:id="@+id/goalFinish"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#773800"
-        android:fontFamily="@font/binggreabold"
-        android:text="목표 완수"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:backgroundTint="#C30303"
-        android:fontFamily="@font/binggreabold"
-        android:text="삭제"
-        android:textSize="20sp"
-        android:visibility="invisible"/>
+        <Button
+            android:id="@+id/goalupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#C37132"
+            android:fontFamily="@font/binggreabold"
+            android:text="목표 수정"
+            android:textColor="#FFFFFF"
+            app:scale_height="200"
+            app:scale_left="150"
+            app:scale_textsize="80"
+            app:scale_width="800" />
+
+        <Button
+            android:id="@+id/goalFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#773800"
+            android:fontFamily="@font/binggreabold"
+            android:text="목표 완수"
+            android:textColor="#FFFFFF"
+            app:scale_height="200"
+            app:scale_left="150"
+            app:scale_textsize="80"
+            app:scale_top="200"
+            app:scale_width="800" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#C30303"
+            android:fontFamily="@font/binggreabold"
+            android:text="삭제"
+            android:visibility="invisible"
+            app:scale_height="100"
+            app:scale_left="480"
+            app:scale_textsize="50"
+            app:scale_top="400"
+            app:scale_width="150" />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>

@@ -55,7 +55,6 @@ class calendarFragment : Fragment() {
                 events.add(EventDay(calendarArr[i],  R.drawable.catt))
             }
 
-            Toast.makeText(this.context,"${userId}, ${calendarArr.size}",Toast.LENGTH_LONG).show()
             calendarView.setEvents(events)
         }
 
