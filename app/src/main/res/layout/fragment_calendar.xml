@@ -8,27 +8,42 @@
     android:id="@+id/calendarFragment"
     tools:context=".calendarFragment">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        app:type="one_day_picker"
-        app:eventsEnabled="true"
-        app:headerColor="#C37132"
-        app:selectionColor="#F4C44C"
-        app:todayLabelColor="#C37132"/>
-
-    <TextView
-        android:id="@+id/date_view"
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="2021-04-22"
-        android:fontFamily="@font/binggrea"
-        android:textColor="#1C0400"
-        android:textSize="58sp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        app:scale_base_height="1800"
+        app:scale_base_width="1080"
+        android:gravity="center">
+
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:scale_height="1200"
+            app:scale_width="950"
+            app:scale_top="100"
+            app:scale_left="65"
+            app:type="one_day_picker"
+            app:eventsEnabled="true"
+            app:headerColor="#C37132"
+            app:selectionColor="#F4C44C"
+            app:todayLabelColor="#C37132"/>
+
+        <TextView
+            android:id="@+id/date_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021-04-22"
+            app:scale_height="300"
+            app:scale_width="1080"
+            app:scale_top="1350"
+            app:scale_textsize="160"
+            android:fontFamily="@font/binggrea"
+            android:textColor="#1C0400"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>

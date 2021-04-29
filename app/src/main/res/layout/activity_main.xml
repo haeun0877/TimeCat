@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,71 +9,50 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/timecatTitle"
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/binggreabold"
-        android:gravity="center"
-        android:paddingTop="150dp"
-        android:text="타임캣"
-        android:textColor="#401A01"
-        android:textSize="70sp" />
+        app:scale_base_height="1900"
+        app:scale_base_width="1080"
+        android:gravity="center">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/timecatTitle"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/binggreabold"
+            app:scale_width="1080"
+            app:scale_height="200"
+            app:scale_top="390"
+            app:scale_textsize="200"
+            android:text="타임캣"
+            android:gravity="center"
+            android:textColor="#401A01"/>
 
-            <ImageView
-                android:id="@+id/button"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1.4"
-                android:fontFamily="@font/binggreabold"
-                android:text=" 간편로그인"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/button2"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:scale_width="1080"
+            app:scale_height="100"
+            app:scale_textsize="50"
+            app:scale_top="1200"
+            android:gravity="center"
+            android:fontFamily="@font/binggreabold"
+            android:text="--------------------- 간편로그인 ---------------------" />
 
         <ImageButton
             android:id="@+id/login"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:scale_width="1080"
+            app:scale_height="120"
+            app:scale_top="1400"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
             android:src="@drawable/kakao_login_large_wide" />
 
-    </LinearLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>

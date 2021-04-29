@@ -9,11 +9,23 @@
     android:orientation="vertical"
     tools:context=".LodingActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="1900"
+        app:scale_base_width="1080"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/cat"
-        android:layout_marginTop="250dp"/>
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_width="300"
+            app:scale_height="1900"
+            app:scale_left="390"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/cat"
+            android:layout_marginTop="250dp"/>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 </LinearLayout>
