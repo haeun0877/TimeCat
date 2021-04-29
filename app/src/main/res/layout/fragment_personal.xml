@@ -8,63 +8,82 @@
     android:orientation="vertical"
     tools:context=".personalFragment">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:background="#FFFFFF"
-        android:src="@drawable/cat3"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/binggreabold"
-        android:text="oo님"
-        android:textColor="#FFFFFF"
-        android:textSize="38sp" />
-
-
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
+        app:scale_base_height="1900"
+        app:scale_base_width="1080"
         android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:scale_height="300"
+            app:scale_width="300"
+            app:scale_top="300"
+            app:scale_left="390"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="#FFFFFF"
+            android:src="@drawable/cat3" />
+
+        <TextView
+            android:id="@+id/nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:scale_height="100"
+            app:scale_width="300"
+            app:scale_top="650"
+            app:scale_left="390"
+            app:scale_textsize="100"
+            android:gravity="center"
+            android:fontFamily="@font/binggreabold"
+            android:text="oo님"
+            android:textColor="#FFFFFF"/>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스티커 수 : "
-            android:fontFamily="@font/binggreabold"
-            android:textSize="34sp"/>
+            app:scale_height="100"
+            app:scale_width="350"
+            app:scale_top="850"
+            app:scale_left="300"
+            app:scale_textsize="100"
+            android:fontFamily="@font/binggreabold"/>
         <TextView
             android:id="@+id/sticker_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:fontFamily="@font/binggrea"
-            android:textSize="34sp"/>
-    </LinearLayout>
+            android:text="0개"
+            app:scale_height="100"
+            app:scale_width="300"
+            app:scale_top="850"
+            app:scale_left="650"
+            app:scale_textsize="100"
+            android:fontFamily="@font/binggrea"/>
 
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="300dp"
-        android:layout_height="130dp"
-        android:background="@drawable/kakao_button"
-        android:scaleType="fitCenter"
-        android:text="로그아웃"
-        android:gravity="center"
-        android:textColor="#401A01"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:src="@drawable/kakao_button" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="300dp"
+            android:layout_height="130dp"
+            android:background="@drawable/kakao_button"
+            android:scaleType="fitCenter"
+            android:text="로그아웃"
+            android:gravity="center"
+            app:scale_height="300"
+            app:scale_width="900"
+            app:scale_top="1000"
+            app:scale_left="100"
+            app:scale_textsize="50"
+            android:textColor="#401A01"
+            android:layout_gravity="center"
+            android:src="@drawable/kakao_button" />
 
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>

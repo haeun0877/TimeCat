@@ -7,41 +7,50 @@
     android:orientation="vertical"
     tools:context=".SecondActivity">
 
-    <LinearLayout
+    <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        app:scale_base_height="1400"
+        app:scale_base_width="800">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyler"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
+            app:scale_height="550"
+            app:scale_width="800"
+            app:scale_top="150"
             tools:listitem="@layout/goal_item" />
 
         <Button
             android:id="@+id/goalAdd"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:backgroundTint="#773800"
             android:fontFamily="@font/binggreabold"
             android:text="목표 추가"
             android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-    </LinearLayout>
+            app:scale_height="150"
+            app:scale_left="100"
+            app:scale_textsize="60"
+            app:scale_top="750"
+            app:scale_width="600" />
 
-    <TextClock
-        android:id="@+id/timetext"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/binggreabold"
-        android:format12Hour="HH:mm:ss"
-        android:textAlignment="center"
-        android:textColor="#1C0400"
-        android:textSize="80sp"
-        android:layout_weight="6"/>
+        <TextClock
+            android:id="@+id/timetext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/binggreabold"
+            android:format12Hour="HH:mm:ss"
+            android:textAlignment="center"
+            android:textColor="#1C0400"
+            android:textSize="80sp"
+            app:scale_height="150"
+            app:scale_left="100"
+            app:scale_textsize="130"
+            app:scale_top="1050"
+            app:scale_width="600"/>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
 </LinearLayout>
