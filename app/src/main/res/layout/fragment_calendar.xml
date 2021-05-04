@@ -11,7 +11,7 @@
     <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scale_base_height="1500"
+        app:scale_base_height="1350"
         app:scale_base_width="1080"
         android:gravity="center">
 
